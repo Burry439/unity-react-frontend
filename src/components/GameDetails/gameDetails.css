@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+.text-medium{
+    font-family: "Open-Sans", "sans-sarif";
+    font-size: 16px ;
+    line-height: 20px;
+    font-weight: 400;
+    color: #ecf0f1;
+}
+
+.game-details{
+    grid-column-end: span 4;
+    display: flex;
+    flex-direction: column;
+    background-color: #39393b;
+    
+    transition: all 0.3s ease 0s;
+}
+
+.game-details:hover{
+    transform: translateY(-3px);
+}
+
+.game-details-image-container{
+    width: 100%;
+    padding-top: 56.25%;
+    overflow: hidden;
+    position: relative;
+}
+
+.game-details-image-container img{
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.game-details-content{
+    padding: 20px;
+}
+
+.game-details-title{
+    margin-bottom: 20px;
+}
+
+.game-details-info{
+    display: flex;
+    align-self: end;
+    align-items: center;
+}
+
+.game-details-play{
+    margin-left: auto;
+    padding: 5px 20px;
+    background-color: #303032;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+@media (max-width:1000px){
+    .game-details{
+        grid-column-end: span 6;
+    }
+}
+
+@media (max-width:700px){
+    .game-details{
+        grid-column-end: span 12;
+    }
+}
+
+@media (max-width:500px){
+    .game-details{
+        grid-column-end: span 6;
+    }
+}
