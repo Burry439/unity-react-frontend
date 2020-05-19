@@ -1,6 +1,6 @@
 import React, {createContext, useState} from 'react';
 import { userReducer } from '../reducers/userReducer';
-
+import config from "../config"
 
 export const UserContext = createContext();
 
@@ -25,7 +25,7 @@ const UserContextProvider = (props) => {
     }
 
     const login  = async (userData) => {
-        const res =  await fetch("http://localhost:8080/users/login", {
+        const res =  await fetch(`${config.API_URL}/users/login`, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             headers: {
               'Content-Type': 'application/json'
@@ -44,7 +44,7 @@ const UserContextProvider = (props) => {
     }
 
     const test = async () =>{
-      const res =  await fetch("http://localhost:8080/users/test", {
+      const res =  await fetch(`${config.API_URL}/users/test`, {
           method: 'GET', // *GET, POST, PUT, DELETE, etc.
           headers: {
             'Authorization' : `Bearer ${user.accessToken}` ,
@@ -58,7 +58,7 @@ const UserContextProvider = (props) => {
 
 
     const signup = async (userData) =>{
-        const res =  await fetch("http://localhost:8080/users/signup", {
+        const res =  await fetch(`${config.API_URL}/users/signup`, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             headers: {
               'Content-Type': 'application/json'

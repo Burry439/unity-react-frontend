@@ -11,9 +11,12 @@ import UserContextProvider from './contexts/userContext';
 import ModalContextProvider from './contexts/modalContext';
 import { BrowserRouter as Router,Route} from "react-router-dom";
 import CModal from './components/Modal/Modal';
-
+import config from "./config"
 
 function App() {
+
+  console.log(config)
+
   return (
     <Router>
       <div className="App">

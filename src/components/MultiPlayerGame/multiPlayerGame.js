@@ -4,7 +4,7 @@ import { GameContext } from "../../contexts/gameContext";
 import io from "socket.io-client";
 import "./multiPlayerGame.css"
 import UnityPlayer from "../UnityPlayer/unityPlayer";
-
+import config from "../../config"
 const Game = () => {
 
   const {user} = useContext(UserContext)
@@ -13,7 +13,7 @@ const Game = () => {
 
     useEffect(() =>{
       console.log("in use effect")
-      Socket = io("http://localhost:7000");  
+      Socket = io(config.MULTIPLAYER_GAME_URL);  
       if(Socket){
         Socket.on("connect", () => {
           console.log("connetion")
@@ -62,7 +62,7 @@ const Game = () => {
       game.isDuplicate ?
             <div>Looks like you have this opened in anoyher tab try closing and refreshing the page</div>                             
           :     
-          <UnityPlayer game="http://localhost:7000/"/>              
+          <UnityPlayer game={config.MULTIPLAYER_GAME_URL + "/"}/>              
     );
 };
 
