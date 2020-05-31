@@ -15,15 +15,14 @@ const Navbar = () => {
 
     return ( 
         <header>
-          <Link  className="logo-container" to="/home">
+          <Link  className="logo-container" to="/">
           <img className="logo" src={Logo} alt="Logo" />
           </Link>
           <nav>     
               { user.id ? 
                   <ul className="nav-links">
                     <li onClick={() => signout()}><a/>Signout</li>
-                    <li onClick={() => openModal(Signup)}><a/>Sign Up</li>
-                    <li><a/>Profile</li>
+                    <li> <Link to="/profile">Profile</Link></li>
                   </ul>
                   :
                   <ul className="nav-links">

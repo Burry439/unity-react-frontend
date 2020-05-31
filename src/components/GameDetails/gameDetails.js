@@ -6,15 +6,14 @@ import {ModalContext} from '../../contexts/modalContext';
 import Login from '../Login/login';
 
 
-const GameDetails = ({title, details,gameType, gameName}) => {
-    console.log(gameName)
+const GameDetails = ({title, details,gameType, gameName,gamePath}) => {
     const {user} = useContext(UserContext)
     const {openModal} = useContext(ModalContext)
     const history = useHistory()
     const toGame = () =>{
         history.push({
                 pathname : `${gameType}`,
-                state:  gameName 
+                state:  {gameName, gamePath} 
                
             })   
     }

@@ -1,15 +1,17 @@
-import React, {useEffect, useContext} from "react";
+import React, {useEffect, useContext,useState} from "react";
 import { UserContext } from "../../contexts/userContext";
 import { GameContext } from "../../contexts/gameContext";
 import io from "socket.io-client";
 import "./multiPlayerGame.css"
-import UnityPlayer from "../UnityPlayer/unityPlayer";
+import GamePlayer from "../GamePlayer/gamePlayer";
 import config from "../../config"
-const Game = () => {
+
+const Game = (props) => {
 
   const {user} = useContext(UserContext)
   const {game,gameDispatch} = useContext(GameContext)
   let Socket = null
+  const [ready, setReady] = useState(false)
 
     useEffect(() =>{
       console.log("in use effect")
@@ -25,11 +27,13 @@ const Game = () => {
         Socket.on("reactFirstSpawn", (data) =>{  
           console.log("reactFirstSpawn")
            gameDispatch({type : "START_GAME", data})
+           setReady(true)
         })
         
         Socket.on("duplicatePlayer", (playerId) =>{
           console.log("duplicatePlayer")
            gameDispatch({type : "SET_PLAYER_AS_DUPLICATE", playerId})
+           setReady(true)
         })
 
         //add new player
@@ -58,12 +62,16 @@ const Game = () => {
       } 
     },[])
     
-    return (
-      game.isDuplicate ?
-            <div>Looks like you have this opened in anoyher tab try closing and refreshing the page</div>                             
-          :     
-          <UnityPlayer game={config.MULTIPLAYER_GAME_URL + "/"}/>              
-    );
+    if(ready){
+      return (
+        game.isDuplicate ?
+              <div>Looks like you have this opened in anoyher tab try closing and refreshing the page</div>                             
+            :     
+            <GamePlayer game={config.MULTIPLAYER_GAME_URL + props.location.pathname}/>              
+      );
+    }else {
+      return(<div>Loading...</div>)
+    }
 };
 
 export default Game
