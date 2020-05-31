@@ -7,10 +7,10 @@ const dev = {
   const prod = {
     API_URL : "https://unity-react-games.herokuapp.com",
     MULTIPLAYER_GAME_URL : "https://online-game-iframe.herokuapp.com",
-    SINGLEPLAYER_GAME_URL : "http://localhost:8000"
+    SINGLEPLAYER_GAME_URL : "https://single-player-games-iframe.herokuapp.com"
   };
   
-  const config = process.env.REACT_APP_STAGE === 'dev'
+  const config = process.env.REACT_APP_STAGE !== 'dev'
     ? prod
     : dev;
   
