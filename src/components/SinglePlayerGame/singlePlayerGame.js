@@ -15,10 +15,12 @@ const SinglePlayerGame = (props) => {
     const [isDuplicate, setIsDuplicate] = useState(false)
     const { addToast } = useToasts()
 
-    console.log(gameUrl, gamePath)
 
     useEffect(() =>{
-        Socket = io(gameUrl); 
+        Socket = io(config.SINGLEPLAYER_GAME_URL); 
+        console.log("config.SINGLEPLAYER_GAME_URL ", config.SINGLEPLAYER_GAME_URL)
+        console.log("gameUrl ", gameUrl)
+
             if(Socket){
                 Socket.on("connect", () => {
                     console.log("connetion")
