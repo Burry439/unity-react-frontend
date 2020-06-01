@@ -7,6 +7,7 @@ import { useToasts } from 'react-toast-notifications'
 
 const SinglePlayerGame = (props) => {
     let Socket = null
+    console.log(props.location.state.gamePath)
     const gamePath = props.location.state.gamePath;
     const gameUrl = config.SINGLEPLAYER_GAME_URL
     const gameName = gamePath.replace(/\//g, '');
@@ -53,7 +54,7 @@ const SinglePlayerGame = (props) => {
 
     if(ready){
         return ( 
-            isDuplicate ? <div>Looks Like YOu Have This Open In another Tab</div> : <GamePlayer game={gameUrl + gamePath}/>
+            isDuplicate ? <div>Looks Like YOu Have This Open In another Tab</div> : <GamePlayer game={gameUrl + gamePath + `/?${user.id}` }/>
          );
     } else {
         return(

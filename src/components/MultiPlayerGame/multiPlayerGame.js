@@ -67,7 +67,7 @@ const Game = (props) => {
         game.isDuplicate ?
               <div>Looks like you have this opened in anoyher tab try closing and refreshing the page</div>                             
             :     
-            <GamePlayer game={config.MULTIPLAYER_GAME_URL + props.location.pathname}/>              
+            <GamePlayer game={config.MULTIPLAYER_GAME_URL}/>              
       );
     }else {
       return(<div>Loading...</div>)

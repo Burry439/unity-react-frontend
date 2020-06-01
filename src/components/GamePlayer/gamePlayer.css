@@ -1,11 +1,11 @@
 #unity-body{
     margin: auto;
-    width: 80%;
+    width: 100%;
     padding: 10px;
     text-align: center;
 }
 
 .unity-player{
-    width: 810px;
-    height: 700px;
+    width: 612px;
+    height: 424px;
 }
