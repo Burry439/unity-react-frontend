@@ -1,0 +1,43 @@
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    width: 100%;
+    min-width: 400px;
+    align-items: center;
+    margin-top: 5px !important;
+}
+
+.invalid-input-message {
+    color: #cc0033;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 15px;
+    margin: 5px 5px 0;
+  }
+
+  .error-message-container{
+        height: 30px;
+  }
+
+.error-message{
+    background-color: red;
+    color: white;
+    margin-top: 5px;
+    border-radius: 15px !important;
+    text-align: center;
+}
+
+.error-message.hide{
+    opacity: 0;
+    transition: opacity 0.2s linear ;
+}
+
+.error-message.show{
+    opacity: 1;
+    transition: opacity 0.2s linear ;
+}

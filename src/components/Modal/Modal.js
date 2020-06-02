@@ -1,25 +1,37 @@
 import React, { useContext,useEffect,useState} from 'react';
 import {ModalContext} from '../../contexts/modalContext';
 import Modal from "react-modal";
-import Login from "../Login/login" 
+import "./modal.css"
 
 Modal.setAppElement('#root')
 const CModal = () => {
     const {modal, closeModal} = useContext(ModalContext)     
     return ( 
         <div>      
-            <Modal w
-            style={{overlay :{borderColor: "grey"},content : {maxWidth : "100%", top: '50px',
-            left: '50px',
-            right: '50px',
-            bottom: '50px',} }} 
+             
+            <Modal 
+            style={{overlay :{borderColor: "grey"},content : {
+  
+                height:"fit-content",
+                width: "fit-content",
+                position : "fixed",
+                margin: "5% auto",
+                left: "0",
+                right: "0",
+                padding : "15px"
+
+             } 
+            }} 
             isOpen={modal.isShowModal}
             onRequestClose={() => closeModal() }
             >
+                <div className="close-button-container">
+                 <div className="close-button" onClick={() => closeModal()}>X</div>
+                </div>
                 <React.Fragment>
              {modal.component != "" ? <modal.component/> : <></>}
               </React.Fragment>
-                <button onClick={() => closeModal()}></button>
+               
             </Modal>
         </div> 
      ) 

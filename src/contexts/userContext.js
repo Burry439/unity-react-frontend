@@ -5,7 +5,7 @@ import config from "../config"
 export const UserContext = createContext();
 
 
-const initialState = JSON.parse(localStorage.getItem("jwt")) || 
+const initialState =  
 {
   id : null,
   username : "",
@@ -15,29 +15,36 @@ const initialState = JSON.parse(localStorage.getItem("jwt")) ||
 };
 
 const UserContextProvider = (props) => {
-    const [user, setUser] = useState(initialState)
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("jwt")) || initialState)
     
-  const setUserInfo = (user) => {
-    //remove last local storage
+  const setUserInfo = (userData) => {
+    const user = {
+      id : userData.user._id,
+      username : userData.user.username,
+      accessToken : userData.accessToken,
+      challenges: userData.user.completedChallenges,
+      tickets : userData.user.tickets
+    }
     localStorage.removeItem("jwt")
     localStorage.setItem("jwt", JSON.stringify(user))
     setUser(user)
   }
 
-  const clearUserInfo = () =>{
-    localStorage.removeItem("jwt")
-    setUser({
-      id : null,
-      username : "",
-      accessToken : "",
-      challenges: null,
-      tickets : null
-    })
-  }
-
-    const signout = () =>{
-      clearUserInfo()
+  const signout = () =>{
+      localStorage.removeItem("jwt")
+      setUser(initialState)
     }
+
+  const validateResponse = async (res) =>{
+    if(res.status === (404 || 500)){
+      console.log("here")
+      return await res.text()
+    }else{
+      const response = await res.json()
+      setUserInfo(response)
+      return("success")
+    }
+  }
 
     const login  = async (userData) => {
         const res =  await fetch(`${config.API_URL}/users/login`, {
@@ -47,17 +54,7 @@ const UserContextProvider = (props) => {
             },
             body: JSON.stringify(userData) // body data type must match "Content-Type" header
           });
-          const response = await res.json()
-          // find better place to put this
-          const user = {
-            id : response.user._id,
-            username : response.user.username,
-            accessToken : response.accessToken,
-            challenges: response.user.completedChallenges,
-            tickets : response.user.tickets
-          }
-          setUserInfo(user)
-
+          return await validateResponse(res)
     }
 
     const signup = async (userData) =>{
@@ -68,31 +65,10 @@ const UserContextProvider = (props) => {
           },
           body: JSON.stringify(userData) // body data type must match "Content-Type" header
         });
-        const response = await res.json()
-        console.log(response)
-        const user = {
-          id : response.user._id,
-          username : response.user.username,
-          accessToken : response.accessToken,
-          challenges: response.user.completedChallenges,
-          tickets : response.user.tickets
-        }
-        setUserInfo(user)
+        return await validateResponse(res)
   }
 
 
-    const test = async () =>{
-      const res =  await fetch(`${config.API_URL}/users/test`, {
-          method: 'GET', // *GET, POST, PUT, DELETE, etc.
-          headers: {
-            'Authorization' : `Bearer ${user.accessToken}` ,
-            'Content-Type': 'application/json'
-          },
-        
-        });
-        const response = await res.json()
-        console.log(response)
-  }
 
 
 
@@ -104,3 +80,21 @@ const UserContextProvider = (props) => {
 }
 
 export default UserContextProvider;
+
+
+
+
+// example of access token for later
+
+  //   const test = async () =>{
+  //     const res =  await fetch(`${config.API_URL}/users/test`, {
+  //         method: 'GET', // *GET, POST, PUT, DELETE, etc.
+  //         headers: {
+  //           'Authorization' : `Bearer ${user.accessToken}` ,
+  //           'Content-Type': 'application/json'
+  //         },
+        
+  //       });
+  //       const response = await res.json()
+  //       console.log(response)
+  // }

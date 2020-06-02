@@ -1,29 +1,42 @@
 import React,{useState,useContext} from 'react';
 import { UserContext } from "../../contexts/userContext";
 import {ModalContext} from '../../contexts/modalContext';
+import { useForm } from "react-hook-form";
 
 const Login = () => {
-    const [username,setUsername] = useState('')
-    const [password,setPassword] = useState('')
+
     const {login} = useContext(UserContext)
     const {closeModal} = useContext(ModalContext)
-
-    const handleSubmit = async (e) =>{
-        e.preventDefault()  
-        const userData = {
-            username : username,
-            password : password
-        }
-        await login(userData)
-        closeModal()
+    const { handleSubmit,register} = useForm();
+    const [showErrorMessage, setShowErrorMessage] = useState({message : "",class : "hide"})
+    const onSubmit = async (data) =>{
+        const res = await login(data)
+        if(res == "success"){
+            closeModal();
+        }else{
+            setShowErrorMessage({
+                message : res,
+                class: "show"
+            })
+             setTimeout(() =>{
+                setShowErrorMessage(prevState =>({
+                    ...prevState,
+                    class: "hide"
+                }))
+             }, 3000)
+       }
     }
 
     return ( 
-        <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="username" required value={username} onChange={(e) => setUsername(e.target.value)}/>
-            <input type="password" placeholder="password" required value={password} onChange={(e) => setPassword(e.target.value)}/>
-            <input type="submit" value="Login"/>
-        </form>
+        <form onSubmit={handleSubmit(onSubmit)}>
+        <input  className="form-control" id=""name="username" type="text" placeholder="please enter a username" ref={register()}/>
+        <input className="form-control" name="password" type="password" placeholder="please enter a password" ref={register()}/>
+
+        <input  className="form-control btn btn-primary"  type="submit" value="Log In"/>
+        <div className="error-message-container">
+            <div className={"error-message " +  showErrorMessage.class}>{showErrorMessage.message}</div>
+        </div>
+    </form>
      );
 }
  

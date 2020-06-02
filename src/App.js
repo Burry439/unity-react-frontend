@@ -3,7 +3,6 @@ import SinglePlayerGame from "./components/SinglePlayerGame/singlePlayerGame"
 import MultiPlayerGame from "./components/MultiPlayerGame/multiPlayerGame"
 import Profile from './components/Profile/profile';
 import { ToastProvider } from 'react-toast-notifications'
-
 import Home from "./components/Home/home"
 import Navbar from "./components/Navbar/navbar"
 import GameContextProvider from './contexts/gameContext';
@@ -12,6 +11,7 @@ import ModalContextProvider from './contexts/modalContext';
 import { BrowserRouter as Router,Route, Switch} from "react-router-dom";
 import CModal from './components/Modal/Modal';
 import config from "./config"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 

@@ -10,7 +10,7 @@ const dev = {
     SINGLEPLAYER_GAME_URL : "https://single-player-games-iframe.herokuapp.com"
   };
   
-  const config = process.env.REACT_APP_STAGE !== 'dev'
+  const config = process.env.REACT_APP_STAGE === 'dev'
     ? prod
     : dev;
   
