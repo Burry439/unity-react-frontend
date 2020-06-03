@@ -12,11 +12,10 @@ import { BrowserRouter as Router,Route, Switch} from "react-router-dom";
 import CModal from './components/Modal/Modal';
 import config from "./config"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Admin from './components/Admin/admin';
 
 function App() {
-
   console.log(config)
-
   return (
     <Router>
       <div className="App">
@@ -30,7 +29,8 @@ function App() {
               <Route path="/" exact component={Home}/>
               <Route path="/mulitPlayerGame" exact  component={MultiPlayerGame}/>   
               <Route path="/singlePlayerGame"  component={SinglePlayerGame}/>  
-              <Route path="/profile"  exact component={Profile}/>     
+              <Route path="/profile"  exact component={Profile}/>    
+              <Route path="/admin"  exact component={Admin}/>   
               <Route component={Home}/>  
             </Switch>
              
