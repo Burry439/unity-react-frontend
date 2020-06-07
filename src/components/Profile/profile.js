@@ -20,8 +20,8 @@ const Profile = () => {
                 <div>
                     <h2>Completed Challenges</h2>
                     <ul>
-                        {user.challenges.map((challenge) => {
-                           return <li className="challenges" key={challenge._id}>challenge name: {challenge.challengeName}</li>
+                        {user.completedChallenges.map((completedChallenge) => {
+                           return <li className="challenges" key={completedChallenge._id}>challenge name: {completedChallenge.challengeName}</li>
                         })}
                     </ul>
                     <h3>Total Tickets: {user.tickets}</h3>

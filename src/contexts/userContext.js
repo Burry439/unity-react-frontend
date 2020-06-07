@@ -10,7 +10,7 @@ const initialState =
   id : null,
   username : "",
   accessToken : "",
-  challenges: null,
+  completedChallenges: null,
   tickets : null
 };
 
@@ -18,12 +18,15 @@ const UserContextProvider = (props) => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("jwt")) || initialState)
     
   const setUserInfo = (userData) => {
+    console.log(userData)
+    //fix _id problem
+    const id = userData._id == undefined ? userData.id : userData._id
     const user = {
-      id : userData.user._id,
-      username : userData.user.username,
+      id : id,
+      username : userData.username,
       accessToken : userData.accessToken,
-      challenges: userData.user.completedChallenges,
-      tickets : userData.user.tickets
+      completedChallenges: userData.completedChallenges,
+      tickets : userData.tickets
     }
     localStorage.removeItem("jwt")
     localStorage.setItem("jwt", JSON.stringify(user))
@@ -41,7 +44,7 @@ const UserContextProvider = (props) => {
       return await res.text()
     }else{
       const response = await res.json()
-      setUserInfo(response)
+      setUserInfo(response.user)
       return("success")
     }
   }

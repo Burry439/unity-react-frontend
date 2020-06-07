@@ -38,8 +38,9 @@ const SinglePlayerGame = (props) => {
              })
  
             Socket.on("challengeCompleted" , (challenge) =>{
+                console.log("in challenge complete")
                 console.log(challenge)
-                user.challenges.push(challenge)
+                user.completedChallenges.push(challenge)
                 user.tickets += challenge.reward;
                 setUserInfo(user)
                 addToast("good job you completed challenge: " + challenge.challengeName, { appearance: 'success' })
