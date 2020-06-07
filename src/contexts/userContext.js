@@ -18,7 +18,6 @@ const UserContextProvider = (props) => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("jwt")) || initialState)
     
   const setUserInfo = (userData) => {
-    console.log(userData)
     //fix _id problem
     const id = userData._id == undefined ? userData.id : userData._id
     const user = {
@@ -40,7 +39,6 @@ const UserContextProvider = (props) => {
 
   const validateResponse = async (res) =>{
     if(res.status === (404 || 500)){
-      console.log("here")
       return await res.text()
     }else{
       const response = await res.json()

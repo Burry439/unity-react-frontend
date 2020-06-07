@@ -34,9 +34,6 @@ const AdminContextProvider = (props) => {
 
     //called in use effect
     const setNewTable = async () =>{
-
-        console.log("in setNewTable")
-
         setIsLoading(true)
         const res =  await fetch(`${config.API_URL}/${table.entityType}/adminget${table.entityType}s/?skip=${pagination.skip}&limit=${pagination.limit}&field=${filter.field}&value=${filter.value}`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.

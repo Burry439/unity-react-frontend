@@ -4,12 +4,9 @@ import { AdminContext } from '../../contexts/adminContext';
 
 const AdminPagination = () => {
     const {pagination, setPagination, table,setNewTable, } = useContext(AdminContext)
-    const [active, setActive] = useState(1)
 
     /// this. will not change table.total count
     const paginate = (skip) =>{
-        setActive(2)
-        console.log(active)
         setPagination(prevState => ({
             limit : prevState.limit,
             buttons : prevState.buttons,
@@ -19,7 +16,6 @@ const AdminPagination = () => {
 
     // this. will not change table.total count
     const setNewPagination = () =>{
-        console.log("in set new Pagination: ", pagination.skip, table.totalCount)
         let items = []
         for (let number = pagination.skip + 1; number <= Math.round(table.totalCount / pagination.limit); number ++) {
             const paginateItem = (number - 1) * pagination.limit
@@ -40,7 +36,6 @@ const AdminPagination = () => {
     //this runs when someone searches or changes tabs NOT always when setNewTable() is called
     useEffect(() =>{
         setNewPagination()
-        // the && is becuase statae is async i want to make sure all relevent fields have been updated before calling useEffect
     }, [table.totalCount])
 
     return ( 

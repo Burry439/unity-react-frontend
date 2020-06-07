@@ -14,7 +14,6 @@ const Game = (props) => {
   const [ready, setReady] = useState(false)
 
     useEffect(() =>{
-      console.log("in use effect")
       Socket = io(config.MULTIPLAYER_GAME_URL);  
       if(Socket){
         Socket.on("connect", () => {

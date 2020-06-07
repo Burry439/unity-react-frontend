@@ -8,12 +8,10 @@ const Admin = () => {
 
     // set table for first time
     useEffect(() =>{
-        console.log(" in table useEffect")
         setNewTable()
     },[table.entityType])
 
     useEffect(() =>{
-        console.log(" in table second useEffect")
         setNewTable()
     },[pagination.skip])
 

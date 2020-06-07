@@ -5,7 +5,6 @@ import "./gamePlayer.css"
 const UnityPlayer = ({game}) => {
     const history = useHistory()
     const {user} = useContext(UserContext)
-    console.log(game)
     useEffect(() =>{
         if(!user.id){
             history.push("/home")

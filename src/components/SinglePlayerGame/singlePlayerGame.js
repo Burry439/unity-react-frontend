@@ -7,7 +7,6 @@ import { useToasts } from 'react-toast-notifications'
 
 const SinglePlayerGame = (props) => {
     let Socket = null
-    console.log(props.location.state.gamePath)
     const gamePath = props.location.state.gamePath;
     const gameUrl = config.SINGLEPLAYER_GAME_URL
     const gameName = gamePath.replace(/\//g, '');
@@ -19,9 +18,6 @@ const SinglePlayerGame = (props) => {
 
     useEffect(() =>{
         Socket = io(config.SINGLEPLAYER_GAME_URL); 
-        console.log("config.SINGLEPLAYER_GAME_URL ", config.SINGLEPLAYER_GAME_URL)
-        console.log("gameUrl ", gameUrl)
-
             if(Socket){
                 Socket.on("connect", () => {
                     console.log("connetion")
@@ -38,8 +34,6 @@ const SinglePlayerGame = (props) => {
              })
  
             Socket.on("challengeCompleted" , (challenge) =>{
-                console.log("in challenge complete")
-                console.log(challenge)
                 user.completedChallenges.push(challenge)
                 user.tickets += challenge.reward;
                 setUserInfo(user)
@@ -47,7 +41,6 @@ const SinglePlayerGame = (props) => {
             })
 
             return () =>{
-                console.log("in return")
                 Socket.close()
             }
         }
