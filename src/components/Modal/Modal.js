@@ -18,7 +18,8 @@ const CModal = () => {
                 margin: "5% auto",
                 left: "0",
                 right: "0",
-                padding : "15px"
+                padding : "15px",
+                zIndex: "99999"
 
              } 
             }} 

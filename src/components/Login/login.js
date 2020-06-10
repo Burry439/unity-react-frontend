@@ -1,42 +1,45 @@
 import React,{useState,useContext} from 'react';
 import { UserContext } from "../../contexts/userContext";
 import {ModalContext} from '../../contexts/modalContext';
-import { useForm } from "react-hook-form";
-
-const Login = () => {
+import Form from '../Form/form';
+ const Login = () => {
+    const [formResponse, setFormResponse] = useState({
+        status : '',
+        message : ''
+    })
 
     const {login} = useContext(UserContext)
     const {closeModal} = useContext(ModalContext)
-    const { handleSubmit,register} = useForm();
-    const [showErrorMessage, setShowErrorMessage] = useState({message : "",class : "hide"})
-    const onSubmit = async (data) =>{
+    
+
+    const handleSubmit = async (data) =>{
+
+        setFormResponse({
+            status : 'loading',
+            message : ''
+        })
+
         const res = await login(data)
         if(res == "success"){
             closeModal();
         }else{
-            setShowErrorMessage({
-                message : res,
-                class: "show"
+           // setMessage(res)
+            setFormResponse({
+                status : 'error',
+                message : res
             })
              setTimeout(() =>{
-                setShowErrorMessage(prevState =>({
-                    ...prevState,
-                    class: "hide"
-                }))
+                setFormResponse({
+                    status : '',
+                    message : ''   
+                })
              }, 3000)
        }
     }
+    
 
     return ( 
-        <form onSubmit={handleSubmit(onSubmit)}>
-        <input  className="form-control" id=""name="username" type="text" placeholder="please enter a username" ref={register()}/>
-        <input className="form-control" name="password" type="password" placeholder="please enter a password" ref={register()}/>
-
-        <input  className="form-control btn btn-primary"  type="submit" value="Log In"/>
-        <div className="error-message-container">
-            <div className={"error-message " +  showErrorMessage.class}>{showErrorMessage.message}</div>
-        </div>
-    </form>
+        <Form formName="login-en" onSubmit={handleSubmit} formResponse={formResponse}/>
      );
 }
  

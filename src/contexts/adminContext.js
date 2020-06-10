@@ -10,7 +10,8 @@ const initialTable = {
         headers : [],
         rows : [],
         totalCount : 0,
-        isLoading : true
+        isLoading : true,
+        exclude : []
 }
 
 const initialFilter = {
@@ -43,6 +44,7 @@ const AdminContextProvider = (props) => {
             },
           });
         const tableData = await res.json()
+        console.log(tableData)
         setIsLoading(false)
         if(res.status == 200){
             const tableRows = tableData.entities ? tableData.entities : tableData.headers
@@ -53,7 +55,8 @@ const AdminContextProvider = (props) => {
                     rows :   tableData.entities ? tableData.entities : [],
                     headers : headers,
                     totalCount : tableData.totalCount,
-                    isLoading: prevState.isLoading
+                    isLoading: prevState.isLoading,
+                    exclude : tableData.exclude
             }))
         }        
     }

@@ -1,26 +1,35 @@
-import React, {useEffect, useContext} from 'react';
+import React, {useContext} from 'react';
 import { AdminContext } from '../../contexts/adminContext';
 import {Table, Spinner} from 'react-bootstrap'
+import {ModalContext} from '../../contexts/modalContext';
+import AdminEdit from './adminEdit';
+import "./admin.css"
 
 const AdminTable = (props) => {
     const {table} = useContext(AdminContext)
-    
+    const {openModal} = useContext(ModalContext)
+
     if(!table.isLoading){
         return (        
             <Table striped bordered hover>
                 <thead>
                         <tr>
                             {props.tableHeaders.map((th, index) =>{
+                                if(!table.exclude.includes(th))
                                 return <th key={index}>{th}</th>
                             })}
+                            
                         </tr>
                 </thead>
                 <tbody>
-                    {props.tableRows.map((tr, index) =>{
-    
-                        return <tr key={index}>{Object.keys(tr).map((td,index) =>{
-                                return <td key={index}>{tr[td].toString()}</td>               
-                        })}</tr>
+                    {props.tableRows.map((tr, index) =>{         
+                        return <tr key={index} >{Object.keys(tr).map((td,index) =>{
+                            if(!table.exclude.includes(Object.keys(tr)[index])){
+                                return <td key={index}>{tr[td].toString()}</td>  
+                            }                                      
+                        })}
+                        <td className="btn-primary table-row" onClick={() => openModal(() => AdminEdit(tr))}><i className="fa fa-edit"></i></td>
+                        </tr>
                     })}
                 </tbody>
             </Table>

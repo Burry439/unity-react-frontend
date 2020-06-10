@@ -12,7 +12,8 @@ const AdminTabs = () => {
             headers : prevState.headers,
             rows : prevState.rows,
             totalCount : prevState.totalCount,
-            isLoading : prevState.isLoading
+            isLoading : prevState.isLoading,
+            exclude : prevState.exclude
         }))
     }
 

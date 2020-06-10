@@ -48,8 +48,8 @@ const AdminSearch = () => {
             </Form.Group>
         <div className="input-group mb-3">
             <input type="text" className="form-control" value={filter.value} onChange={(e) => setSearchValue(e.target.value)}/>
-                <div className="input-group-append">
-                    <button className="btn btn-outline-secondary" type="button" onClick={() => setNewTable()}>Button</button>
+                <div className="input-group">
+                    <button className="btn btn-primary" type="button" onClick={() => setNewTable()}>Button</button>
         </div>
       </div>
   </div>

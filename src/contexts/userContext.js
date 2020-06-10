@@ -48,7 +48,7 @@ const UserContextProvider = (props) => {
   }
 
     const login  = async (userData) => {
-        const res =  await fetch(`${config.API_URL}/users/login`, {
+        const res =  await fetch(`${config.API_URL}/user/login`, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             headers: {
               'Content-Type': 'application/json'
@@ -59,7 +59,7 @@ const UserContextProvider = (props) => {
     }
 
     const signup = async (userData) =>{
-      const res =  await fetch(`${config.API_URL}/users/signup`, {
+      const res =  await fetch(`${config.API_URL}/user/signup`, {
           method: 'POST', // *GET, POST, PUT, DELETE, etc.
           headers: {
             'Content-Type': 'application/json'

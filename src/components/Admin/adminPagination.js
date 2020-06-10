@@ -17,7 +17,7 @@ const AdminPagination = () => {
     // this. will not change table.total count
     const setNewPagination = () =>{
         let items = []
-        for (let number = pagination.skip + 1; number <= Math.round(table.totalCount / pagination.limit); number ++) {
+        for (let number = pagination.skip + 1; number <= Math.ceil(table.totalCount / pagination.limit); number ++) {
             const paginateItem = (number - 1) * pagination.limit
             items.push(
               <Pagination.Item key={number} onClick={() => paginate(paginateItem)} >
@@ -35,8 +35,10 @@ const AdminPagination = () => {
 
     //this runs when someone searches or changes tabs NOT always when setNewTable() is called
     useEffect(() =>{
+
         setNewPagination()
-    }, [table.totalCount])
+       
+    }, [table.totalCount,table.entityType])
 
     return ( 
         <div>
