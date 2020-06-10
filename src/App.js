@@ -16,6 +16,9 @@ import Admin from './components/Admin/admin';
 import AdminContextProvider from './contexts/adminContext';
 
 function App() {
+
+  console.log(config)
+
   return (
     <Router>
       <div className="App">
