@@ -12,7 +12,6 @@ const Field = ({ field,formValidation,initalValue}) => {
         <label>{label}</label>
         {(() => {
           switch (attributes.type) {
-       
             case 'textarea':
             return <>
             <textarea key={key} autoFocus  defaultValue={initalValue} {...attributes} ref={register(validation)}/>
