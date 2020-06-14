@@ -1,24 +1,19 @@
-import React, {useEffect,useState} from 'react';
-import Select from 'react-select'
+import React from 'react';
 import "./form.css"
 
-const SelectField = ({ field, onChange,currentValue}) => {
-    const { label, key, ...attributes } = field
-    const [options, setOptions] = useState()
-    useEffect(() =>{
-      let o = []
-      field.options.forEach(option => {
-        o.push({value : option[Object.keys(option)[1]], label : option[Object.keys(option)[1]], name : field.name} )
-      });
-      setOptions(o)
-    },[])
-   
+const SelectField = ({ field, currentValue,formValidation}) => {
+    const { label, key, validation,...attributes } = field
+    const {register} = formValidation
+   console.log(currentValue)
     return (
       <div>
       <React.Fragment>
-        <label>{label}</label>
-        {/* the defualt value only sets the label the value part seems to be brokn so i am setting it in te form itself */}
-        <Select options={options}  onChange={onChange} defaultValue={{label : currentValue, value : currentValue}}/>
+      <label>{label}</label>
+    <select className="form-control" defaultValue={currentValue} {...attributes} ref={register}>
+      {field.options.map(option => (
+        <option key={option["name"]} name={field.name} value={option["name"]}>{option["name"]}</option>
+      ))}
+    </select>
       </React.Fragment>
       </div>
     )

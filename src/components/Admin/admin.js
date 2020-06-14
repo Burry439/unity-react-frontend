@@ -20,14 +20,14 @@ const Admin = () => {
     },[pagination.skip])
 
 
-        return ( 
-            <div className="container">
-            <AdminSearch/>
-            <button onClick={() => openModal(AdminCreate)}>Create new {table.entityType}</button>
-           <AdminTabs/>
-            <AdminPagination/>
-            </div>
-         );
+    return ( 
+        <div className="container">
+        <AdminSearch/>
+        <button onClick={() => openModal(AdminCreate)}>Create new {table.entityType}</button>
+        <AdminTabs/>
+        <AdminPagination/>
+        </div>
+        );
 }
  
 export default Admin;
