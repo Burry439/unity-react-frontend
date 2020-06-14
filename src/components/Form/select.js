@@ -4,7 +4,6 @@ import "./form.css"
 const SelectField = ({ field, currentValue,formValidation}) => {
     const { label, key, validation,...attributes } = field
     const {register} = formValidation
-   console.log(currentValue)
     return (
       <div>
       <React.Fragment>

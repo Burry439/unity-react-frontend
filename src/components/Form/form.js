@@ -26,7 +26,6 @@ const Form = ({ formName, onSubmit, formResponse, value =""}) => {
       setForm({
         fields : formData.fields.map(field => ({
           ...field,
-          name: field.name || field.label
         })),
         config : formData.config
       })

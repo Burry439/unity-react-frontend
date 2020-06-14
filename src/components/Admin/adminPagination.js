@@ -1,9 +1,7 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import Pagination from 'react-bootstrap/Pagination'
-import { AdminContext } from '../../contexts/adminContext';
 
-const AdminPagination = () => {
-    const {pagination, setPagination, table,setNewTable, } = useContext(AdminContext)
+const AdminPagination = ({pagination, setPagination, table}) => {
 
     /// this. will not change table.total count
     const paginate = (skip) =>{
@@ -25,7 +23,6 @@ const AdminPagination = () => {
               </Pagination.Item>
             );    
     }
-    
     setPagination({
             skip : 0,
             limit : 10,
@@ -35,9 +32,7 @@ const AdminPagination = () => {
 
     //this runs when someone searches or changes tabs NOT always when setNewTable() is called
     useEffect(() =>{
-
         setNewPagination()
-       
     }, [table.totalCount,table.entityType])
 
     return ( 

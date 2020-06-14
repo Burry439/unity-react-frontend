@@ -13,18 +13,14 @@ import CModal from './components/Modal/Modal';
 import config from "./config"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Admin from './components/Admin/admin';
-import AdminContextProvider from './contexts/adminContext';
 
 function App() {
 
-  console.log(config)
-
   return (
     <Router>
-      <div className="App">
+      <div className="App">   
       <ToastProvider autoDismissTimeout={3000}>
         <ModalContextProvider>
-          <AdminContextProvider>
         <UserContextProvider>
         <GameContextProvider>
           <Navbar/> 
@@ -40,7 +36,6 @@ function App() {
              
         </GameContextProvider>
         </UserContextProvider>
-        </AdminContextProvider>
         </ModalContextProvider>
         </ToastProvider>
       </div>

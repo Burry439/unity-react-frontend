@@ -1,9 +1,7 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import AdminTable from './adminTable';
-import { AdminContext } from '../../contexts/adminContext';
 import {Tabs, Tab} from 'react-bootstrap'
-const AdminTabs = () => {
-    const {table,setTable,setFilter} = useContext(AdminContext)
+const AdminTabs = ({table,setTable,setFilter}) => {
 
     const setNewtableEntity = (entityType)=>{
         resetSearchValue()
@@ -26,17 +24,16 @@ const AdminTabs = () => {
     }
 
     return (  
-        <Tabs activeKey={table.entityType} onSelect={(e) => setNewtableEntity(e)} >
-                
+        <Tabs activeKey={table.entityType} onSelect={(e) => setNewtableEntity(e)} >  
         <Tab eventKey="challenge" title="challenges">
-             <AdminTable tableHeaders={table.headers} tableRows={table.rows}/> 
+             <AdminTable table={table}  setTable={setTable}/> 
         </Tab>
         <Tab eventKey="user" title="users">
-        <AdminTable tableHeaders={table.headers} tableRows={table.rows}/>
+        <AdminTable table={table} setTable={setTable}/>
         </Tab>
         <Tab eventKey="game" title="games">
        
-        <AdminTable tableHeaders={table.headers} tableRows={table.rows}/>
+        <AdminTable table={table} setTable={setTable} />
         </Tab>
     </Tabs>
     );

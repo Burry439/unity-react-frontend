@@ -1,14 +1,14 @@
 import React, {useContext, useEffect} from 'react';
 import {Form} from 'react-bootstrap'
-import { AdminContext } from '../../contexts/adminContext';
 
-const AdminSearch = () => {
-    const {filter, setFilter, table,setNewTable} = useContext(AdminContext)
-
+const AdminSearch = ({filter, setFilter, table,setNewTable}) => {
+    
     const setDropdown = async () =>{
         let items = []
         table.headers.forEach((header) =>{
-        items.push(<option key={header}>{header}</option>)
+        if(!table.exclude.includes(header)){
+            items.push(<option key={header}>{header}</option>)
+        }
         })
         setFilter(prevState => ({
             field : prevState.field,

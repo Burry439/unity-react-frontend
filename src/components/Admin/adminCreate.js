@@ -1,13 +1,10 @@
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import Form from '../Form/form';
 import config from "../../config"
-import { AdminContext } from '../../contexts/adminContext';
 
-
-
-const AdminCreate = () => {
+const AdminCreate = ({table, setTable}) => {
+  console.log(table)
     const errorStatus = ["404","500","401"] 
-    const {table, setTable} = useContext(AdminContext)
 
     const [formResponse, setFormResponse] = useState({
         status : '',
@@ -15,13 +12,10 @@ const AdminCreate = () => {
     })
 
     const validateResponse = async (res) =>{
-        console.log(res)
         if(errorStatus.includes(res.status.toString())){
-            console.log(" in error")
           return await res.text()
         }else{
             const newEntity = await res.json()
-            console.log(newEntity)
             setTable(prevState =>({
                 ...prevState,
                 totalCount : prevState.totalCount + 1,
@@ -46,7 +40,6 @@ const AdminCreate = () => {
           });
 
           const response = await validateResponse(res)
-          console.log(response)
           if(response == "success"){
             setFormResponse({
                 status : 'success',
