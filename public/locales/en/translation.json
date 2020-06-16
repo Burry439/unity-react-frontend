@@ -1,0 +1,31 @@
+{
+    "home": {
+      "title": "select a game",
+      "play" : "play",
+      "login" : "Login",
+      "signup" : "Signup",
+        "games" : {
+          "cubeGame" :{
+            "title" : "Cube game demo",
+            "details" : "its a single player game for testing only"
+          },
+          "stickGame" :{
+            "title" : "Stick Game Demo",
+            "details" : "its a single player game for testing only"
+          } ,
+          "multiPlayerGame" : {
+            "title" : "Multiplayer Game Demo",
+            "details" : "its a multiplayer game for testing only"
+          }
+      }
+    },
+    "navbar" :{
+      "changeLanguage" : "change language",
+      "signUp" : "Sign up",
+      "login" : "login",
+      "english" : "English",
+      "hebrew" : "Hebrew",
+      "signout" : "Signout",
+      "profile" : "Profile"
+    }  
+  }
