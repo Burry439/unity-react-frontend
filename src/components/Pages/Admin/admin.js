@@ -5,8 +5,11 @@ import AdminTabs from './adminTabs';
 import AdminCreate from './adminCreate';
 import {ModalContext} from '../../../contexts/modalContext';
 import config from "../../../config"
+import { useTranslation } from 'react-i18next';
+
 const Admin = () => {
     const {openModal} = useContext(ModalContext)
+    const { i18n } = useTranslation();
 
     const initialTable = {
         entityType : "user",
@@ -39,7 +42,8 @@ const Admin = () => {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                'Language' : i18n.language
             },
         });
         const tableData = await res.json()

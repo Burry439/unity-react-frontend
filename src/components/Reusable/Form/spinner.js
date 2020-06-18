@@ -4,7 +4,7 @@ import "./form.css"
 
 const FormSpinner = ({ loading }) => {
     return loading ? (
-        <Spinner animation="border" variant="primary" />
+        <Spinner animation="border" variant="primary"/>
     ) : null
   }
 

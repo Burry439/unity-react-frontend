@@ -1,13 +1,17 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import "./form.css"
 
-const Field = ({ field,formValidation,initalValue}) => {
+const Field = ({ field,formValidation,initalValue,direction}) => {
+
+  console.log(direction)
+
+  
    const { label, key,validation, ...attributes } = field
     const {register,errors,watch} = formValidation
     const name = attributes.name
 
     return (
-      <div>
+      <div style={direction}>
       <React.Fragment>
         <label>{label}</label>
         {(() => {

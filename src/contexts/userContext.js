@@ -47,11 +47,12 @@ const UserContextProvider = (props) => {
     }
   }
 
-    const login  = async (userData) => {
+    const login  = async (userData,language) => {
         const res =  await fetch(`${config.API_URL}/user/login`, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'language' : language
             },
             body: JSON.stringify(userData) // body data type must match "Content-Type" header
           });

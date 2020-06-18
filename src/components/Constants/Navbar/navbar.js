@@ -19,9 +19,17 @@ const Navbar = () => {
       i18n.changeLanguage(lang)
     }
 
-    
+    const rtl = {
+      direction : "rtl"
+    }
+  
+    const ltr = {
+        direction : "ltr"
+    }
+  
+    const direction = i18n.language == "en" ? ltr : rtl
     return ( 
-        <header>
+        <header style={direction}>
           <Link  className="logo-container" to="/">
           <img className="logo" src={Logo} alt="Logo" />
           </Link>
@@ -33,7 +41,7 @@ const Navbar = () => {
                 {t('navbar.changeLanguage')}
               </Dropdown.Toggle>
 
-              <Dropdown.Menu>
+              <Dropdown.Menu >
                 <Dropdown.Item onClick={() => changeLanguage("en")}>{t('navbar.english')}</Dropdown.Item>
                 <Dropdown.Item onClick={() => changeLanguage("he")}>{t('navbar.hebrew')}</Dropdown.Item>
               </Dropdown.Menu>

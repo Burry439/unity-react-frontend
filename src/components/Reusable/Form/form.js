@@ -19,6 +19,22 @@ const Form = ({ formName, onSubmit, formResponse, value =""}) => {
     fields : []
   })
 
+  const rtl = {
+    display : "flex", 
+    flexDirection : "column", 
+    alignItems : "flex-start",
+    direction : "rtl"
+  }
+
+  const ltr = {
+    display : "flex", 
+    flexDirection : "column", 
+    alignItems : "flex-start"
+  }
+
+  const direction = i18n.language == "en" ? ltr : rtl
+
+
   const getForm = async () =>{
     let form;
     try{
@@ -51,13 +67,12 @@ const Form = ({ formName, onSubmit, formResponse, value =""}) => {
   
     if(formExists){
       return (
-        <form onSubmit={handleSubmit(handleFormSubmit)}>
+        <form onSubmit={handleSubmit(handleFormSubmit)} style={direction}>
           {form.fields.map(field => {
-            console.log(field)
             if(field.type == "select"){  
-            return <Select key={field.name} currentValue={value[field.name]} field={field} formValidation={{register}}/>
+            return <Select  key={field.name} currentValue={value[field.name]}formValidation={{register}}  field={field}  direction={direction}/>
             }else{  
-              return <Input key={field.name} initalValue={value[field.name]} field={field} formValidation={{register,errors,watch}}/>
+              return <Input key={field.name} initalValue={value[field.name]}  formValidation={{register,errors,watch}} field={field} direction={direction}/>
             }
        })}
           
@@ -67,7 +82,7 @@ const Form = ({ formName, onSubmit, formResponse, value =""}) => {
             </button>
             <FormSpinner loading={formResponse.status === 'loading' && form.config.spinner} />
           </div>
-          <Message status={formResponse.status} text={formResponse.message} />
+          <Message status={formResponse.status} text={formResponse.message} direction={direction}/>
         </form>
       )
     }else{

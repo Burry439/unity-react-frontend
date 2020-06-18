@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
 import Form from '../../Reusable/Form/form';
 import config from "../../../config"
+import { useTranslation } from 'react-i18next';
 
 const AdminEdit = ({table, setTable,tr}) => {
+    const { i18n } = useTranslation();
+
     const errorStatus = ["404","500","401"] 
     const [formResponse, setFormResponse] = useState({
         status : '',
@@ -40,7 +43,8 @@ const AdminEdit = ({table, setTable,tr}) => {
         const res =  await fetch(`${config.API_URL}/${table.entityType}/adminupdate${table.entityType}`, {
             method: 'PUT', // *GET, POST, PUT, DELETE, etc.
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Language' : i18n.language
             },
             body: JSON.stringify(data) // body data type must match "Content-Type" header
           });

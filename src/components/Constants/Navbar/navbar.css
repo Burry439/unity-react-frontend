@@ -6,10 +6,9 @@ header {
   padding : 0;
   background-color:#24252A;
   display: flex !important;
-  justify-content: flex-end;
   align-items: center;
-  padding-left: 10px ;
-  padding-right: 40px ;
+  padding-inline-start: 10px ;
+  padding-inline-end: 40px ;
 }
 
 
@@ -23,7 +22,7 @@ li,a, button {
 }
 
 .logo-container{
-  margin-right: auto;
+  margin-inline-end: auto;
 }
 
 .logo {
@@ -59,7 +58,7 @@ li,a, button {
 
 
 button{
-  margin-left: 20px;
+  margin-inline-start: 20px;
   padding : 9px 25px;
   background-color: rgba(0,136,169,1);
   border: none;
