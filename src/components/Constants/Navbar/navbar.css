@@ -4,11 +4,10 @@ header {
   box-sizing: border-box;
   margin: 0;
   padding : 0;
-  background-color:#24252A;
   display: flex !important;
   align-items: center;
-  padding-inline-start: 10px ;
-  padding-inline-end: 40px ;
+  padding-inline-start: 50px ;
+  padding-inline-end: 80px ;
 }
 
 
@@ -42,8 +41,8 @@ li,a, button {
 
 .nav-links li{
  display: inline-block;
- padding-inline-start: 20px;
- cursor: pointer;
+ padding-inline-start: 40px;
+ cursor: pointer
 }
 
 .nav-links li a{

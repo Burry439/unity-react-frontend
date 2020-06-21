@@ -24,12 +24,6 @@ export default  {
 				 "pattern": {value:/^\S+@\S+\.\S+$/ , "message": "invalid email address"}
 			}
 		 },
-        {
-			"label": "tickets",
-	        "placeholder": "Enter an amount of tickets",
-			"name" : "tickets",
-            "type" : "number"
-		 },
 		    {
 			"label": "password",
 	        "placeholder": "Enter a password",

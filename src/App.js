@@ -9,38 +9,40 @@ import CModal from './components/Reusable/Modal/Modal';
 import GameContextProvider from './contexts/gameContext';
 import UserContextProvider from './contexts/userContext';
 import ModalContextProvider from './contexts/modalContext';
-import config from "./config"
-import { BrowserRouter as Router,Route, Switch} from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import { ToastProvider } from 'react-toast-notifications'
+import { AnimatePresence } from "framer-motion"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
+  const location = useLocation()
+
   return (
-    <Router>
       <div className="App">   
-      <Suspense fallback={(<div>Loading</div>)}>
+      {/* <Suspense fallback={(<div>Loading</div>)}> */}
         <ToastProvider autoDismissTimeout={3000}>
           <ModalContextProvider>
           <UserContextProvider>
           <GameContextProvider>
             <Navbar/> 
             <CModal/>
-              <Switch>
+            <AnimatePresence exitBeforeEnter>
+              <Switch location={location} key={location.key}>
                 <Route path="/" exact component={Home}/>
+                <Route path="/profile" component={Profile}/>  
                 <Route path="/mulitPlayerGame" exact  component={MultiPlayerGame}/>   
                 <Route path="/singlePlayerGame"  component={SinglePlayerGame}/>  
-                <Route path="/profile"  exact component={Profile}/>    
                 <Route path="/admin"  exact component={Admin}/>   
                 <Route component={Home}/>  
               </Switch>
+              </AnimatePresence>
           </GameContextProvider>
           </UserContextProvider>
           </ModalContextProvider>
           </ToastProvider>
-        </Suspense>
+        {/* </Suspense> */}
       </div>
-    </Router>
   );
 }
 

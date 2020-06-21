@@ -1,6 +1,17 @@
 .container{
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+@font-face {
+    font-family: 'Arcade';
+    src: local("Arcade"), url( ../../../fonts/ArcadeLight-d196.ttf);
+   
+}
+.title{
+    font-family: "Arcade";
+    color: #ffffff;
+    font-size: 50px;
 }

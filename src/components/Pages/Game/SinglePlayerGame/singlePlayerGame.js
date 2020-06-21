@@ -4,6 +4,30 @@ import GamePlayer from '../GamePlayer/gamePlayer';
 import config from "../../../../config"
 import io from "socket.io-client";
 import { useToasts } from 'react-toast-notifications'
+import { motion } from "framer-motion"
+import BouncingLoader from "../../../Reusable/Loaders/bouncingLoader"
+const containerVariants = {
+    hidden :{
+      opacity : 0,
+      y : "-100vw"
+    },
+    visible : {
+      opacity : 1,
+      y : 0,
+      transition:{
+        type : "spring",
+        delay : 0.5,
+        stiffness : 50
+      }
+    },
+    exit: {
+      y: '-100vh',
+      transition : {
+        ease: "easeInOut"
+      }
+    }
+  }
+
 
 const SinglePlayerGame = (props) => {
     let Socket = null
@@ -14,7 +38,6 @@ const SinglePlayerGame = (props) => {
     const [ready, setReady] = useState(false)
     const [isDuplicate, setIsDuplicate] = useState(false)
     const { addToast } = useToasts()
-
 
     useEffect(() =>{
         Socket = io(config.SINGLEPLAYER_GAME_URL); 
@@ -46,15 +69,21 @@ const SinglePlayerGame = (props) => {
         }
     },[])
 
-    if(ready){
-        return ( 
-            isDuplicate ? <div>Looks Like you have this open In another Tab</div> : <GamePlayer game={gameUrl + gamePath + `/?${user.id}` }/>
-         );
-    } else {
-        return(
-            <div>lLoading...</div>
-        )
-    }
+    return(
+        <motion.div className="container" variants={containerVariants} initial="hidden" animate="visible" exit="exit">
+        {ready ? 
+            isDuplicate ?
+            <div variants={containerVariants} initial="hidden" animate="visible">Looks Like you have this open In another Tab</div>
+            :
+             <GamePlayer game={gameUrl + gamePath + `/?${user.id}` }/>
+            :
+            <>
+            <div  variants={containerVariants} initial="hidden" animate="visible">Loading...</div>
+            <BouncingLoader/>
+            </>
+        }
+        </motion.div>
+    )
  
 }
  

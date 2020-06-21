@@ -6,6 +6,7 @@ import AdminCreate from './adminCreate';
 import {ModalContext} from '../../../contexts/modalContext';
 import config from "../../../config"
 import { useTranslation } from 'react-i18next';
+import { motion } from "framer-motion"
 
 const Admin = () => {
     const {openModal} = useContext(ModalContext)
@@ -81,12 +82,12 @@ const Admin = () => {
     },[pagination.skip])
 
     return ( 
-        <div className="container">
+        <motion.div className="container" exit="exit">
         <AdminSearch filter={filter} setFilter={setFilter} table={table} setNewTable={setNewTable}/>
         <button onClick={() => openModal(() => AdminCreate({table, setTable}))}>Create new {table.entityType}</button>
         <AdminTabs table={table} setTable={setTable} setFilter={setFilter}/>
         <AdminPagination pagination={pagination} setPagination={setPagination} table={table} setNewTable={setNewTable}/>
-        </div>
+        </motion.div>
         );
 }
  
