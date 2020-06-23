@@ -1,4 +1,4 @@
-import React, {useContext,useState, useEffect} from 'react';
+import React, {useContext,useEffect} from 'react';
 import Login from "../../Reusable/Login/login"
 import Signup from "../../Reusable/Signup/signup"
 import { Link } from 'react-router-dom'
@@ -11,9 +11,9 @@ import {Dropdown} from 'react-bootstrap'
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
-
   const {openModal} = useContext(ModalContext)
   const {user, signout} = useContext(UserContext)
+
 
     const changeLanguage = (lang) =>{
       i18n.changeLanguage(lang)
@@ -27,12 +27,17 @@ const Navbar = () => {
         direction : "ltr"
     }
   
+    
+
     const direction = i18n.language == "en" ? ltr : rtl
+   
     return ( 
         <header style={direction}>
-          <Link  className="logo-container" to="/">
+          <div className="logo-container">
+          <Link   to="/">
           <img className="logo" src={Logo} alt="Logo" />
           </Link>
+          </div>
           <nav>     
             <div className="nav-end-container">
             <div className="language-selector">

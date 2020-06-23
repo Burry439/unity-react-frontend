@@ -40,7 +40,7 @@ const SinglePlayerGame = (props) => {
     const { addToast } = useToasts()
 
     useEffect(() =>{
-        Socket = io(config.SINGLEPLAYER_GAME_URL); 
+        Socket = io(config.API_URL); 
             if(Socket){
                 Socket.on("connect", () => {
                     console.log("connetion")
@@ -68,7 +68,6 @@ const SinglePlayerGame = (props) => {
             }
         }
     },[])
-
     return(
         <motion.div className="container" variants={containerVariants} initial="hidden" animate="visible" exit="exit">
         {ready ? 
