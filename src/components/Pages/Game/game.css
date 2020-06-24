@@ -9,3 +9,15 @@
     width: 612px;
     height: 424px;
 }
+.loading{
+    width: 612px;
+    height: 424px;
+}
+
+.react-toast-notifications__toast__content{
+    color: black !important;
+}
+
+.react-toast-notifications__toast__dismiss-icon{
+    fill: black !important;
+}

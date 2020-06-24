@@ -14,14 +14,13 @@ import { ToastProvider } from 'react-toast-notifications'
 import { AnimatePresence } from "framer-motion"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 function App() {
   const location = useLocation()
 
   return (
       <div className="App">   
       {/* <Suspense fallback={(<div>Loading</div>)}> */}
-        <ToastProvider autoDismissTimeout={3000}>
+        <ToastProvider>
           <ModalContextProvider>
           <UserContextProvider>
           <GameContextProvider>

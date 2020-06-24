@@ -7,7 +7,7 @@ export default {
     "fields" : [
         {
         "label": "game name",
-        "name": "name",
+        "name": "gameName",
         "placeholder": "Enter the Name of the game",
         "required": true
         }
