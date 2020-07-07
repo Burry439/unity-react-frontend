@@ -6,6 +6,7 @@ import "./modal.css"
 Modal.setAppElement('#root')
 const CModal = () => {
     const {modal, closeModal} = useContext(ModalContext)     
+
     return ( 
         <div>      
              

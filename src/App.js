@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react';
 import Navbar from "./components/Constants/Navbar/navbar"
-import SinglePlayerGame from "./components/Pages/Game/SinglePlayerGame/singlePlayerGame"
-import MultiPlayerGame from "./components/Pages/Game/MultiPlayerGame/multiPlayerGame"
+import Game from "./components/Pages/Game/game"
 import Profile from './components/Pages/Profile/profile';
 import Admin from './components/Pages/Admin/admin';
 import Home from "./components/Pages/Home/home"
@@ -30,8 +29,7 @@ function App() {
               <Switch location={location} key={location.key}>
                 <Route path="/" exact component={Home}/>
                 <Route path="/profile" component={Profile}/>  
-                <Route path="/mulitPlayerGame" exact  component={MultiPlayerGame}/>   
-                <Route path="/singlePlayerGame"  component={SinglePlayerGame}/>  
+                <Route path="/game"  component={Game}/>  
                 <Route path="/admin"  exact component={Admin}/>   
                 <Route component={Home}/>  
               </Switch>

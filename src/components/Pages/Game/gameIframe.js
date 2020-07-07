@@ -1,8 +1,8 @@
 import React, {useEffect, useContext} from 'react';
 import { useHistory } from "react-router-dom";
-import { UserContext } from "../../../../contexts/userContext";
-import "../game.css"
-const UnityPlayer = ({game}) => {
+import { UserContext } from "../../../contexts/userContext";
+import "./game.css"
+const GameIframe = ({game}) => {
     const history = useHistory()
     const {user} = useContext(UserContext)
     useEffect(() =>{
@@ -12,12 +12,12 @@ const UnityPlayer = ({game}) => {
     },[user])
  
     return ( 
-        <div id="unity-body">
-            <iframe className="unity-player"  src={game} ></iframe>
+        <div id="game-body">
+            <iframe className="game-player"  src={game} ></iframe>
       </div>
                 
         
      );
 }
  
-export default UnityPlayer;
+export default GameIframe;

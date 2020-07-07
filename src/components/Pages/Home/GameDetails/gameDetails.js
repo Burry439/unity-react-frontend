@@ -7,7 +7,7 @@ import Login from "../../../Reusable/Login/login";
 import Signup from "../../../Reusable/Signup/signup";
 import { useTranslation } from 'react-i18next';
 
-const GameDetails = ({title, details,gameType, path}) => {
+const GameDetails = ({title, details,path}) => {
     const { t } = useTranslation();
 
     const {user} = useContext(UserContext)
@@ -15,7 +15,7 @@ const GameDetails = ({title, details,gameType, path}) => {
     const history = useHistory()
     const toGame = () =>{
         history.push({
-            pathname : `${gameType}/${path}`
+            pathname : `game/${path}`
         })   
     }
 

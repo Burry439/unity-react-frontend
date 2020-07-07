@@ -1,11 +1,11 @@
-#unity-body{
+#game-body{
     margin: auto;
     width: 100%;
     padding: 10px;
     text-align: center;
 }
 
-.unity-player{
+.game-player{
     width: 612px;
     height: 424px;
 }

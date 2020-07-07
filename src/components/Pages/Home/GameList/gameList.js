@@ -12,9 +12,9 @@ const GameList = () => {
             <div className="game-list-container">
                 <section className="game-list">
                    
-                        <GameDetails title={t("home.games.multiPlayerGame.title")} details={t("home.games.multiPlayerGame.details")} gameType="/mulitPlayerGame" gameType="/mulitPlayerGame" gameName="onlineGame"/>
-                        <GameDetails title={t("home.games.stickGame.title")} details={t("home.games.cubeGame.details")} gameType="singlePlayerGame" path="stickGame" />
-                        <GameDetails title={t("home.games.cubeGame.title")} details={t("home.games.cubeGame.details")} gameType="singlePlayerGame" path="cubeGame"/>
+                        <GameDetails title={t("home.games.multiPlayerGame.title")} details={t("home.games.multiPlayerGame.details")} path="onlineGame"/>
+                        <GameDetails title={t("home.games.fallGame.title")} details={t("home.games.fallGame.details")}  path="fallGame" />
+                        <GameDetails title={t("home.games.cubeGame.title")} details={t("home.games.cubeGame.details")}  path="cubeGame"/>
                 </section>
             </div>
      );

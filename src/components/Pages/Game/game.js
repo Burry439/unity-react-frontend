@@ -1,12 +1,11 @@
 import React, {useEffect,useContext,useState} from 'react';
-import { UserContext } from "../../../../contexts/userContext";
-import GamePlayer from '../GamePlayer/gamePlayer';
-import config from "../../../../config"
+import { UserContext } from "../../../contexts/userContext";
+import GameIframe from './gameIframe';
+import config from "../../../config"
 import io from "socket.io-client";
 import { useToasts } from 'react-toast-notifications'
 import { motion, useAnimation } from "framer-motion"
-import loading from "../tenor.gif"
-
+import loading from "./tenor.gif"
 
 const exit = {
   y: '-100vh',
@@ -43,22 +42,22 @@ const loaderVariants = {
   },
 }
 
-const SinglePlayerGame = (props) => {
+const Game = (props) => {
     const gameControls = useAnimation()
     const loaderControls = useAnimation()
     let Socket = null
-    let gamePath = props.location.pathname.match(/.*\/(.*)$/)[1];
-    const gameUrl = config.SINGLEPLAYER_GAME_URL
+    let gameName = props.location.pathname.match(/.*\/(.*)$/)[1];
+    const apiUrl = gameName == "onlineGame" ? config.MULTIPLAYER_GAME_URL : config.SINGLEPLAYER_GAME_URL
     const {user, setUserInfo} = useContext(UserContext)
     const [isDuplicate, setIsDuplicate] = useState(false)
     const { addToast } = useToasts()
     useEffect(() =>{
       loaderControls.start("visible")
-      Socket = io(config.SINGLEPLAYER_GAME_URL); 
+      Socket = io(apiUrl); 
       if(Socket){
         Socket.on("connect", () => {
             console.log("connetion")
-            Socket.emit("ReactConnected",{userId : user.id, gameName : gamePath})
+            Socket.emit("ReactConnected",{userId : user.id, gameName : gameName})
       });
 
         Socket.on("gameReady" , () =>{
@@ -81,8 +80,7 @@ const SinglePlayerGame = (props) => {
           Socket.close()
       }
   }
-
-  },[])
+},[])
     return(
         <motion.div className="container" exit={exit}>
         {
@@ -91,7 +89,7 @@ const SinglePlayerGame = (props) => {
             :
             <>
               <motion.div variants={gameVariants} initial="hidden" animate={gameControls} exit="exit">
-                  <GamePlayer  game={`${gameUrl}/${gamePath}/?${user.id}`}/>
+                  <GameIframe game={`${apiUrl}/${gameName}/?${user.id}`}/>
               </motion.div>
 
               <motion.div variants={loaderVariants} initial="hidden" animate={loaderControls} exit="exit">
@@ -105,4 +103,4 @@ const SinglePlayerGame = (props) => {
  
 }
  
-export default SinglePlayerGame;
+export default Game;
