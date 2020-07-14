@@ -5,7 +5,6 @@ import Profile from './components/Pages/Profile/profile';
 import Admin from './components/Pages/Admin/admin';
 import Home from "./components/Pages/Home/home"
 import CModal from './components/Reusable/Modal/Modal';
-import GameContextProvider from './contexts/gameContext';
 import UserContextProvider from './contexts/userContext';
 import ModalContextProvider from './contexts/modalContext';
 import { Route, Switch, useLocation } from "react-router-dom";
@@ -17,28 +16,24 @@ function App() {
   const location = useLocation()
 
   return (
-      <div className="App">   
-      {/* <Suspense fallback={(<div>Loading</div>)}> */}
-        <ToastProvider>
-          <ModalContextProvider>
-          <UserContextProvider>
-          <GameContextProvider>
-            <Navbar/> 
-            <CModal/>
-            <AnimatePresence exitBeforeEnter>
-              <Switch location={location} key={location.key}>
-                <Route path="/" exact component={Home}/>
-                <Route path="/profile" component={Profile}/>  
-                <Route path="/game"  component={Game}/>  
-                <Route path="/admin"  exact component={Admin}/>   
-                <Route component={Home}/>  
-              </Switch>
-              </AnimatePresence>
-          </GameContextProvider>
+        <div className="App">   
+            <ToastProvider>
+            <ModalContextProvider>
+            <UserContextProvider>
+                <Navbar/> 
+                <CModal/>
+                <AnimatePresence exitBeforeEnter>
+                    <Switch location={location} key={location.key}>
+                        <Route path="/" exact component={Home}/>
+                        <Route path="/profile" component={Profile}/>  
+                        <Route path="/game"  component={Game}/>  
+                        <Route path="/admin"  exact component={Admin}/>   
+                        <Route component={Home}/>  
+                    </Switch>
+                </AnimatePresence>
           </UserContextProvider>
           </ModalContextProvider>
           </ToastProvider>
-        {/* </Suspense> */}
       </div>
   );
 }

@@ -40,13 +40,13 @@ const AdminEdit = ({table, setTable,tr}) => {
             message : ''
         })
 
-        const res =  await fetch(`${config.API_URL}/${table.entityType}/adminupdate${table.entityType}`, {
-            method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+        const res =  await fetch(`${config.API_URL}/admin/update/?entityType=${table.entityType}`, {
+            method: 'PUT', 
             headers: {
               'Content-Type': 'application/json',
               'Language' : i18n.language
             },
-            body: JSON.stringify(data) // body data type must match "Content-Type" header
+            body: JSON.stringify(data) 
           });
 
           const response = await validateResponse(res)

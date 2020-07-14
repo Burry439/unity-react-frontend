@@ -1,5 +1,6 @@
 import React from 'react';
 import AdminTable from './adminTable';
+import AdminExclude from "./adminExclude"
 import {Tabs, Tab} from 'react-bootstrap'
 const AdminTabs = ({table,setTable,setFilter}) => {
 
@@ -11,7 +12,7 @@ const AdminTabs = ({table,setTable,setFilter}) => {
             rows : prevState.rows,
             totalCount : prevState.totalCount,
             isLoading : prevState.isLoading,
-            exclude : prevState.exclude
+            exclude : AdminExclude[entityType]
         }))
     }
 
@@ -32,7 +33,6 @@ const AdminTabs = ({table,setTable,setFilter}) => {
         <AdminTable table={table} setTable={setTable}/>
         </Tab>
         <Tab eventKey="game" title="games">
-       
         <AdminTable table={table} setTable={setTable} />
         </Tab>
     </Tabs>

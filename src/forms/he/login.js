@@ -1,16 +1,16 @@
 export default {
-    config :{
-        spinner : true,
-        buttonText : "התחברות"
+    "config" :{
+        "spinner" : true,
+        "buttonText" : "התחברות"
     },
-    fields : [
+    "fields" : [
         {
             "label": "שם משתמש",
             "name": "username",
             "placeholder": "הכנס שם משתמש",
             "validation" : {
 				"required": "אנא הזן שם משתמש",
-			}
+            }
         },
         {
             "label": "סיסמה",

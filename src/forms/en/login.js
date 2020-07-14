@@ -1,25 +1,25 @@
 export default {
-    config :{
-        spinner : true,
-        buttonText : "Login"
+    "config" :{
+        "spinner" : true,
+        "buttonText" : "Login"
     },
-    fields : [
+    "fields" : [
         {
             "label": "username",
             "name": "username",
             "placeholder": "Enter your username",
             "validation" : {
-				"required": "please enter your username",
-			}
+                "required": "please enter your username",
+            }
         },
         {
             "label": "password",
-	        "placeholder": "Enter your password",
-			"name" : "password",
+            "placeholder": "Enter your password",
+            "name" : "password",
             "type" : "password",
             "validation" : {
-				"required": "please enter your password",
-			}
+                "required": "please enter your password",
+            }
         }
     ]
 }

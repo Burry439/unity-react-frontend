@@ -89,7 +89,7 @@ const Game = (props) => {
             :
             <>
               <motion.div variants={gameVariants} initial="hidden" animate={gameControls} exit="exit">
-                  <GameIframe game={`${apiUrl}/${gameName}/?${user.id}`}/>
+                <GameIframe game={`${apiUrl}/${gameName}/?${user.id}`}/> 
               </motion.div>
 
               <motion.div variants={loaderVariants} initial="hidden" animate={loaderControls} exit="exit">

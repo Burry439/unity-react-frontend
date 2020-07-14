@@ -6,7 +6,6 @@ import "./admin.css"
 
 const AdminTable = ({table,setTable}) => {
     const {openModal} = useContext(ModalContext)
-    console.log(table.headers)
     if(!table.isLoading){
         return (        
             <Table striped bordered hover>

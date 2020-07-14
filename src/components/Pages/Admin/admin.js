@@ -18,7 +18,7 @@ const Admin = () => {
         rows : [],
         totalCount : 0,
         isLoading : true,
-        exclude : []
+        exclude : ["completedChallenges","__v", "password"]
     }
 
     const initialFilter = {
@@ -39,7 +39,7 @@ const Admin = () => {
 
     const setNewTable = async () =>{
         setIsLoading(true)
-        const res =  await fetch(`${config.API_URL}/${table.entityType}/adminget${table.entityType}s/?skip=${pagination.skip}&limit=${pagination.limit}&field=${filter.field}&value=${filter.value}`, {
+        const res =  await fetch(`${config.API_URL}/admin/get/?entityType=${table.entityType}&skip=${pagination.skip}&limit=${pagination.limit}&field=${filter.field}&value=${filter.value}&exclude=${table.exclude}`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             headers: {
                 'Content-Type': 'application/json',
@@ -55,12 +55,11 @@ const Admin = () => {
             const headers = Object.keys(tableRows[0])
             setTable(prevState => ({
                 entityType : prevState.entityType,
-                // if we got back data and not just field names set rows
                 rows :   tableData.entities ? tableData.entities : [],
                 headers : headers,
                 totalCount : tableData.totalCount,
                 isLoading: prevState.isLoading,
-                exclude : tableData.exclude
+                exclude : prevState.exclude
             }))
         }        
     }

@@ -3,7 +3,7 @@ export default {
         "buttonText" : "Create Challenge",
         "spinner": true
     },
-        "fields" : [
+    "fields" : [
         {
             "label": "challengeName",
             "name" : "challengeName",
@@ -19,14 +19,14 @@ export default {
             "label": "gameName",
             "required": true
         },
-            {
+        {
             "label": "reward",
             "name" : "reward",
             "placeholder": "Enter the amount of tickets for this reward",
             "type" : "number",
             "required": true
         },
-            {
+        {
             "name": "active",
             "label": "active",
             "type" : "checkbox"
