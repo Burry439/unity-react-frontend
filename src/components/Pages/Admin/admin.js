@@ -48,14 +48,21 @@ const Admin = () => {
             },
         });
         const tableData = await res.json()
-        console.log(tableData)
         setIsLoading(false)
         if(res.status == 200){
-            const tableRows = tableData.entities ? tableData.entities : tableData.headers
-            const headers = Object.keys(tableRows[0])
+            let headers;
+            let rows;
+            // if we got an array we have documents in the collections
+            if(Array.isArray(tableData.entities)){
+                headers = Object.keys(tableData.entities[0])
+                rows = tableData.entities
+            }else{
+                headers = Object.keys(tableData.entities)
+                rows = []
+            }
             setTable(prevState => ({
                 entityType : prevState.entityType,
-                rows :   tableData.entities ? tableData.entities : [],
+                rows :   rows,
                 headers : headers,
                 totalCount : tableData.totalCount,
                 isLoading: prevState.isLoading,

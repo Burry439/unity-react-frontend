@@ -7,9 +7,8 @@ import Login from "../../../Reusable/Login/login";
 import Signup from "../../../Reusable/Signup/signup";
 import { useTranslation } from 'react-i18next';
 
-const GameDetails = ({title, details,path}) => {
-    const { t } = useTranslation();
-
+const GameDetails = ({title, details,path, t}) => {
+    
     const {user} = useContext(UserContext)
     const {openModal} = useContext(ModalContext)
     const history = useHistory()
@@ -32,10 +31,10 @@ const GameDetails = ({title, details,path}) => {
                 <div className="game-details-info">
                     <p className="text-medium">{details}</p>
                 {user.id ? 
-                   <p className="game-details-play text-medium" onClick={() => toGame()}>{t("home.play")}</p> : 
+                   <p className="game-details-play text-medium" onClick={() => toGame()}>{t("play")}</p> : 
                    <>
-                   <p className="game-details-play text-medium" onClick={() => openModal(Login)}>{t("home.login")}</p> 
-                   <p className="game-details-play text-medium" onClick={() => openModal(Signup)}>{t("home.signup")}</p> 
+                   <p className="game-details-play text-medium" onClick={() => openModal(Login)}>{t("login")}</p> 
+                   <p className="game-details-play text-medium" onClick={() => openModal(Signup)}>{t("signup")}</p> 
                    </>
                 }
                 </div>

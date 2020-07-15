@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import {Dropdown} from 'react-bootstrap'
 
 const Navbar = () => {
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation("constant");
   const {openModal} = useContext(ModalContext)
   const {user, signout} = useContext(UserContext)
 
@@ -43,25 +43,25 @@ const Navbar = () => {
             <div className="language-selector">
               <Dropdown>
               <Dropdown.Toggle variant="success" id="dropdown-basic">
-                {t('navbar.changeLanguage')}
+                {t('changeLanguage')}
               </Dropdown.Toggle>
 
               <Dropdown.Menu >
-                <Dropdown.Item onClick={() => changeLanguage("en")}>{t('navbar.english')}</Dropdown.Item>
-                <Dropdown.Item onClick={() => changeLanguage("he")}>{t('navbar.hebrew')}</Dropdown.Item>
+                <Dropdown.Item onClick={() => changeLanguage("en")}>{t('english')}</Dropdown.Item>
+                <Dropdown.Item onClick={() => changeLanguage("he")}>{t('hebrew')}</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </div>
               <div className="user-links">
               { user.id ? 
                   <ul className="nav-links">
-                    <li onClick={() => signout()}><a/>{t('navbar.signout')}</li>
-                    <li> <Link to="/profile">{t('navbar.profile')}</Link></li>
+                    <li onClick={() => signout()}><a/>{t('signout')}</li>
+                    <li> <Link to="/profile">{t('profile')}</Link></li>
                   </ul>
                   :
                   <ul className="nav-links">
-                    <li onClick={() => openModal(Signup)}><a/>{t('navbar.signUp')}</li>
-                    <li onClick={() => openModal(Login)}><a/>{t('navbar.login')}</li>
+                    <li onClick={() => openModal(Signup)}><a/>{t('signup')}</li>
+                    <li onClick={() => openModal(Login)}><a/>{t('login')}</li>
                   </ul>
               }
             </div>

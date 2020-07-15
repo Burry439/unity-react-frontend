@@ -14,7 +14,6 @@ export default {
             "type" : "select",
             "name": "gameName",
             "entity" : "Game",
-            "displayname" : "name",
             "options" : ["cubeGame" , "stickGame", "multiPlayerGame"],
             "label": "gameName",
             "required": true

@@ -11,11 +11,13 @@ import { Route, Switch, useLocation } from "react-router-dom";
 import { ToastProvider } from 'react-toast-notifications'
 import { AnimatePresence } from "framer-motion"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import SpinningLoader from './components/Reusable/Loaders/spinningLoader';
 
 function App() {
   const location = useLocation()
 
   return (
+      <Suspense fallback={<div className="suspenseLoader"><SpinningLoader animation="border" variant="primary" /></div>}>
         <div className="App">   
             <ToastProvider>
             <ModalContextProvider>
@@ -34,7 +36,8 @@ function App() {
           </UserContextProvider>
           </ModalContextProvider>
           </ToastProvider>
-      </div>
+        </div>
+      </Suspense>
   );
 }
 

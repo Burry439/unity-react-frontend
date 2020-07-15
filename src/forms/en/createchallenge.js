@@ -12,8 +12,6 @@
 		},
 		{
 			"type" : "select",
-			"entity" : "Game",
-			"displayname" : "name",
 			"options" : ["cubeGame" , "stickGame", "multiPlayerGame", "fallGame"],
 			"label": "game name",
 			"name": "gameName",

@@ -53,7 +53,7 @@ const AdminEdit = ({table, setTable,tr}) => {
           if(response == "success"){
             setFormResponse({
                 status : 'success',
-                message : "Entity Updated"
+                message : `Updated ${table.entityType}`
             })
         }else{
             setFormResponse({

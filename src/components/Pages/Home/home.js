@@ -27,7 +27,7 @@ const containerVariants = {
 }
 
 const Home = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("home");
     return ( 
       <motion.div className="container"
         variants={containerVariants}
@@ -36,10 +36,10 @@ const Home = () => {
         exit="exit"
       >
         <div className="top-section">
-        <h1 className="title">{t('home.title')}</h1>
+        <h1 className="title">{t('title')}</h1>
         </div>
         <div className="game-list-section">
-        <GameList/>
+        <GameList t={t}/>
         </div>
       </motion.div>
       

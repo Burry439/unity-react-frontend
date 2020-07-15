@@ -1,9 +1,7 @@
 import React, {createContext, useState} from 'react';
-import { userReducer } from '../reducers/userReducer';
 import config from "../config"
 
 export const UserContext = createContext();
-
 
 const initialState =  
 {

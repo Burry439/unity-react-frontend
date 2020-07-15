@@ -43,7 +43,7 @@ const AdminCreate = ({table, setTable}) => {
           if(response == "success"){
             setFormResponse({
                 status : 'success',
-                message : "Entity created"
+                message : `Created ${table.entityType}`
             })
         }else{
            // setMessage(res)

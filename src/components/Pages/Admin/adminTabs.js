@@ -30,10 +30,13 @@ const AdminTabs = ({table,setTable,setFilter}) => {
              <AdminTable table={table}  setTable={setTable}/> 
         </Tab>
         <Tab eventKey="user" title="users">
-        <AdminTable table={table} setTable={setTable}/>
+            <AdminTable table={table} setTable={setTable}/>
         </Tab>
         <Tab eventKey="game" title="games">
-        <AdminTable table={table} setTable={setTable} />
+            <AdminTable table={table} setTable={setTable} />
+        </Tab>
+        <Tab eventKey="text" title="page text">
+            <AdminTable table={table} setTable={setTable} />
         </Tab>
     </Tabs>
     );

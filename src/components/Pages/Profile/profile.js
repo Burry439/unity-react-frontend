@@ -32,7 +32,6 @@ const Profile = () => {
 
     useEffect(() =>{
         if(!user.id){
-            console.log("no user")
             history.push("/home")
         }
     },[user])
