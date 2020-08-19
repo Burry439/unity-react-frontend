@@ -28,7 +28,14 @@ export default  {
 			"placeholder": "Enter an amount of tickets",
 			"name" : "tickets",
 			"type" : "number"
-		}
+		},
+		{
+            "type" : "select",
+            "name": "role",
+            "options" : ["admin" , "user"],
+            "label": "User role",
+            "required": true
+        },
 	]
 }
 

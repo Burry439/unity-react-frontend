@@ -2,6 +2,7 @@ import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 import Backend from 'i18next-http-backend';
+import config from './config';
 const fallbackLng = ['en']; 
 const availableLanguages = ['en', 'he'];
 
@@ -18,7 +19,7 @@ i18n
     whitelist: availableLanguages,
     backend: {
       // for all available options read the backend's repository readme file
-      loadPath: 'http://localhost:8080/text/getPageText/?language={{lng}}&page={{ns}}'
+      loadPath: `${config.API_URL}/text/getPageText/?language={{lng}}&page={{ns}}`
     },
     react:{
       useSuspense: true

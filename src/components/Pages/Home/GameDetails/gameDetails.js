@@ -30,7 +30,7 @@ const GameDetails = ({title, details,path, t}) => {
                 </p>
                 <div className="game-details-info">
                     <p className="text-medium">{details}</p>
-                {user.id ? 
+                {user._id ? 
                    <p className="game-details-play text-medium" onClick={() => toGame()}>{t("play")}</p> : 
                    <>
                    <p className="game-details-play text-medium" onClick={() => openModal(Login)}>{t("login")}</p> 

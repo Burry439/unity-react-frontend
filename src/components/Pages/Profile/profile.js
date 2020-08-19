@@ -1,4 +1,4 @@
-import React, {useContext,useEffect} from 'react';
+import React, {useContext,useEffect,lazy} from 'react';
 import { UserContext } from "../../../contexts/userContext";
 import { useHistory } from "react-router-dom";
 import "./profile.css"
@@ -31,12 +31,12 @@ const Profile = () => {
     const history = useHistory()
 
     useEffect(() =>{
-        if(!user.id){
+        if(user != "loading" && !user._id){
             history.push("/home")
         }
     },[user])
 
-    if(user.id){
+    if(user._id){
         return ( 
             <motion.div 
             className="container"
@@ -58,9 +58,8 @@ const Profile = () => {
             </motion.div>
             );
     }else{
-        return <motion.div exit></motion.div>
+        return <motion.div exit>Loading...</motion.div>
     }
-
 }
  
 export default Profile;

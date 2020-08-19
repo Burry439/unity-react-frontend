@@ -47,7 +47,14 @@ export default  {
 			"validation" : {
 				"message": "The passwords do not match"
 		 	}
-		}
+		},
+		{
+            "type" : "select",
+            "name": "role",
+            "options" : ["admin" , "user"],
+            "label": "User role",
+            "required": true
+        },
     ]
 }
 

@@ -1,63 +1,56 @@
-import React, {createContext, useState} from 'react';
+import React, {createContext, useState, useEffect} from 'react';
 import config from "../config"
 
 export const UserContext = createContext();
 
-const initialState =  
-{
-  id : null,
-  username : "",
-  accessToken : "",
-  completedChallenges: null,
-  tickets : null
-};
 
 const UserContextProvider = (props) => {
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem("jwt")) || initialState)
-    
-  const setUserInfo = (userData) => {
-    //fix _id problem
-    const id = userData._id == undefined ? userData.id : userData._id
-    const user = {
-      id : id,
-      username : userData.username,
-      accessToken : userData.accessToken,
-      completedChallenges: userData.completedChallenges,
-      tickets : userData.tickets
-    }
-    localStorage.removeItem("jwt")
-    localStorage.setItem("jwt", JSON.stringify(user))
-    setUser(user)
-  }
-
-  const signout = () =>{
-      localStorage.removeItem("jwt")
-      setUser(initialState)
-    }
+  const [user, setUser] = useState("loading")
+  const errorStatuses = [404,500,401,403]
+  useEffect(() =>{
+    console.log("in use effect")
+    getUser()
+  },[])
 
   const validateResponse = async (res) =>{
-    if(res.status === (404 || 500)){
+    console.log(res.status)
+    if(errorStatuses.includes(res.status)){
+      console.log("in if")
+      setUser("not logged in")
       return await res.text()
     }else{
+      console.log("in else")
       const response = await res.json()
-      setUserInfo(response.user)
+      console.log("validate response else : " + response)
+      setUser(response)
       return("success")
     }
   }
+  
+  const signout = async () =>{
+    const res =  await fetch(`${config.API_URL}/user/logout`, {
+      method: 'GET', // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        'Content-Type': 'application/json',
+        'language' : "en"
+      },
+    });
+    setUser("not logged in")
+  }
 
-    const login  = async (userData,language) => {
-        const res =  await fetch(`${config.API_URL}/user/login`, {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            headers: {
-              'Content-Type': 'application/json',
-              'language' : language
-            },
-            body: JSON.stringify(userData) // body data type must match "Content-Type" header
-          });
-          return await validateResponse(res)
-    }
+  const login  = async (userData,language) => {
+      const res =  await fetch(`${config.API_URL}/user/login`, {
+          method: 'POST', // *GET, POST, PUT, DELETE, etc.
+          headers: {
+            'Content-Type': 'application/json',
+            'language' : language
+          },
+          body: JSON.stringify(userData) // body data type must match "Content-Type" header
+        });
+      return await validateResponse(res)
+  }
 
-    const signup = async (userData) =>{
+  const signup = async (userData) =>{
       const res =  await fetch(`${config.API_URL}/user/signup`, {
           method: 'POST', // *GET, POST, PUT, DELETE, etc.
           headers: {
@@ -68,15 +61,23 @@ const UserContextProvider = (props) => {
         return await validateResponse(res)
   }
 
+  const getUser = async () =>{
+      const res =  await fetch(`${config.API_URL}/user/getUser`, {
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          'Content-Type': 'application/json',
+          'language' : "en"
+        },
+    });
+    console.log(res)
+    return await validateResponse(res)
+  }
 
-
-
-
-    return(
-        <UserContext.Provider value={{user, login,signout,signup, setUserInfo}}>
+  return(
+        <UserContext.Provider value={{user, login,signout,signup, getUser,setUser}}>
             {props.children}
         </UserContext.Provider>
-    )
+  )
 }
 
 export default UserContextProvider;

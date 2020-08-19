@@ -14,7 +14,7 @@ export default {
             "type" : "select",
             "name": "gameName",
             "entity" : "Game",
-            "options" : ["cubeGame" , "stickGame", "multiPlayerGame"],
+            "options" : ["cubeGame" , "stickGame", "multiPlayerGame", "fallGame"],
             "label": "gameName",
             "required": true
         },

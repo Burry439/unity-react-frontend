@@ -14,8 +14,7 @@ const Navbar = () => {
   const {openModal} = useContext(ModalContext)
   const {user, signout} = useContext(UserContext)
 
-
-    const changeLanguage = (lang) =>{
+  const changeLanguage = (lang) =>{
       i18n.changeLanguage(lang)
     }
 
@@ -53,10 +52,13 @@ const Navbar = () => {
             </Dropdown>
           </div>
               <div className="user-links">
-              { user.id ? 
+              { user._id ? 
                   <ul className="nav-links">
                     <li onClick={() => signout()}><a/>{t('signout')}</li>
                     <li> <Link to="/profile">{t('profile')}</Link></li>
+                    {
+                      user.role == "admin" ? <li> <Link to="/admin">{t('admin')}</Link></li> : <></>
+                    }
                   </ul>
                   :
                   <ul className="nav-links">

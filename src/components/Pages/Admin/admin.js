@@ -4,13 +4,24 @@ import AdminPagination from './adminPagination';
 import AdminTabs from './adminTabs';
 import AdminCreate from './adminCreate';
 import {ModalContext} from '../../../contexts/modalContext';
+import {UserContext} from '../../../contexts/userContext';
+import { useHistory } from "react-router-dom";
+
 import config from "../../../config"
 import { useTranslation } from 'react-i18next';
 import { motion } from "framer-motion"
 
 const Admin = () => {
     const {openModal} = useContext(ModalContext)
+    const {user} = useContext(UserContext)
     const { i18n } = useTranslation();
+    const history = useHistory()
+
+    useEffect(() =>{
+        if(user != "loading" && (!user._id || user.role != "admin")){
+            history.push("/home")
+        }
+      },[user])
 
     const initialTable = {
         entityType : "user",
@@ -68,6 +79,8 @@ const Admin = () => {
                 isLoading: prevState.isLoading,
                 exclude : prevState.exclude
             }))
+        } else {
+            history.push("/home")
         }        
     }
 
