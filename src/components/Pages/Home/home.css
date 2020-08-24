@@ -1,5 +1,4 @@
 .container{
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -15,3 +14,53 @@
     color: #ffffff;
     font-size: 50px;
 }
+
+
+.game-list-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding : 60px 0;
+}
+
+.cartridge{
+    margin: 10px;
+    transition: all 0.3s ease 0s;
+}
+
+.cartridge:hover{
+    transform: translateY(-3px);
+}
+
+
+.game-button-container{
+    display: flex;
+    justify-content: center;
+    background: black;
+
+}
+
+.game-button{
+    padding: 5px 20px;
+    cursor: pointer;
+    text-align: center;
+    margin: 2px;
+}
+
+
+
+.game-button:hover{
+    color: yellow;
+}
+
+
+.text-medium{
+    font-family: "Open-Sans", "sans-sarif";
+    font-size: 16px ;
+    line-height: 20px;
+    font-weight: 400;
+    color: #ecf0f1;
+}
+
+

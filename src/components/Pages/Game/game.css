@@ -1,18 +1,23 @@
-#game-body{
-    margin: auto;
+
+
+.game-player-screen{
     width: 100%;
-    padding: 10px;
-    text-align: center;
+    height: 100%;
+    overflow: hidden;
+    margin-top: 20px;
+
 }
 
-.game-player{
+.game-player-container{
+  
+
+    margin: auto;
+    text-align: center;
+    position: absolute;
     width: 612px;
     height: 424px;
 }
-.loading{
-    width: 612px;
-    height: 424px;
-}
+
 
 .react-toast-notifications__toast__content{
     color: black !important;

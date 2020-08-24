@@ -1,13 +1,12 @@
 import React, {useEffect,useContext,useState} from 'react';
 import { UserContext } from "../../../contexts/userContext";
-import GameIframe from './gameIframe';
+import GamePlayer from './gamePlayer';
 import config from "../../../config"
 import io from "socket.io-client";
 import { useToasts } from 'react-toast-notifications'
 import { motion, useAnimation } from "framer-motion"
 import { useHistory } from "react-router-dom";
-
-import loading from "./tenor.gif"
+import { useTranslation } from 'react-i18next';
 
 const exit = {
   y: '-100vh',
@@ -15,7 +14,6 @@ const exit = {
     ease: "easeInOut"
   }
 }
-
 const hidden = {
   display : "none",
   opacity : 0,
@@ -26,26 +24,25 @@ const visible = {
   opacity : 1
 }
 
-const gameVariants = {
-  hidden,
-  visible,
-}
-
-const loaderVariants = {
+const duplicateTabVariants = {
   hidden,
   visible : {
     ...visible,
     transition:{
-      delay : 0.5,
-      duration : 1.5,
+      delay :0.5,
+      duration : 0.5,
       stiffness : 50,
       ease : "easeInOut"
     }
   },
 }
+
+
+
 let Socket = null
 
 const Game = (props) => {
+   const { t } = useTranslation("game");
     const gameControls = useAnimation()
     const loaderControls = useAnimation()
     const history = useHistory()
@@ -65,6 +62,7 @@ const Game = (props) => {
     },[user])
 
      useEffect(() => {
+      
        return () => {
          console.log("in return : " + Socket)
          if(Socket != null){
@@ -74,6 +72,7 @@ const Game = (props) => {
      }, [])
     const startSocketConnection = () =>{
       loaderControls.start("visible")
+     
       Socket = io(apiUrl); 
       if(Socket){
         Socket.on("connect", () => {
@@ -104,18 +103,18 @@ const Game = (props) => {
           <motion.div className="container" exit={exit}>
           {
               isDuplicate ?
-              <motion.div variants={loaderVariants} initial="hidden" animate="visible">Looks Like you have this open In another Tab</motion.div>
+              <motion.div variants={duplicateTabVariants} initial="hidden" animate="visible">{t('duplicateTab')}</motion.div>
               :
-              <>
-                <motion.div variants={gameVariants} initial="hidden" animate={gameControls} exit="exit">
-                  <GameIframe game={`${apiUrl}/${gameName}/?${user._id}`}/> 
-                </motion.div>
-
-                <motion.div variants={loaderVariants} initial="hidden" animate={loaderControls} exit="exit">
-                    <div><img src={loading} className="loading"/></div>
-                </motion.div>
-
-              </>
+              <GamePlayer 
+                    className="game-player-screen" 
+                    gameControls={gameControls}
+                    loaderControls={loaderControls}
+                    exit={exit}
+                    hidden={hidden}
+                    visible={visible}
+                    gameTitle={t(gameName + "Title")}
+                    game={`${apiUrl}/${gameName}/?${user._id}`}/> 
+      
           }
           </motion.div>
       )

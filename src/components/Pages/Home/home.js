@@ -1,5 +1,5 @@
 import React from 'react';
-import GameList from "./GameList/gameList"
+import GameList from "./gameList"
 import "./home.css"
 import { useTranslation } from 'react-i18next';
 import { motion } from "framer-motion"
@@ -29,6 +29,7 @@ const containerVariants = {
 const Home = () => {
   const { t } = useTranslation("home");
     return ( 
+      <>
       <motion.div className="container"
         variants={containerVariants}
         initial="hidden"
@@ -38,10 +39,11 @@ const Home = () => {
         <div className="top-section">
         <h1 className="title">{t('title')}</h1>
         </div>
+        </motion.div>
         <div className="game-list-section">
         <GameList t={t}/>
         </div>
-      </motion.div>
+      </>
       
      );
 }
