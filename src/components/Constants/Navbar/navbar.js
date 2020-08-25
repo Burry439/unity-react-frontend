@@ -7,7 +7,6 @@ import Logo from "./logo.png";
 import {ModalContext} from '../../../contexts/modalContext';
 import {UserContext} from '../../../contexts/userContext';
 import { useTranslation } from 'react-i18next';
-import {Dropdown} from 'react-bootstrap'
 
 const Navbar = () => {
   const { t, i18n } = useTranslation("constant");
@@ -17,7 +16,6 @@ const Navbar = () => {
   const changeLanguage = (lang) =>{
       i18n.changeLanguage(lang)
     }
-
     const rtl = {
       direction : "rtl"
     }
@@ -26,8 +24,6 @@ const Navbar = () => {
         direction : "ltr"
     }
   
-    
-
     const direction = i18n.language == "en" ? ltr : rtl
    
     return ( 
@@ -39,32 +35,29 @@ const Navbar = () => {
           </div>
           <nav>     
             <div className="nav-end-container">
-            <div className="language-selector">
-              <Dropdown>
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
-                {t('changeLanguage')}
-              </Dropdown.Toggle>
 
-              <Dropdown.Menu >
-                <Dropdown.Item onClick={() => changeLanguage("en")}>{t('english')}</Dropdown.Item>
-                <Dropdown.Item onClick={() => changeLanguage("he")}>{t('hebrew')}</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </div>
+           <div className="language-selector">
+            <i className="fa fa-language icon-large"  style={{fontSize : "30px"}} aria-hidden="true"></i>
+            <div className="languages">
+                <span className="language" onClick={() => changeLanguage("en")}>{t('english')}</span>
+                <span className="language" onClick={() => changeLanguage("he")}>{t('hebrew')}</span>
+            </div>
+           </div>        
+
               <div className="user-links">
               { user._id ? 
-                  <ul className="nav-links">
-                    <li onClick={() => signout()}><a/>{t('signout')}</li>
-                    <li> <Link to="/profile">{t('profile')}</Link></li>
+                  <div className="nav-buttons">
+                    <span onClick={() => signout()}>{t('signout')}</span>
+                    <span><Link className="nav-button" to="/profile">{t('profile')}</Link></span>
                     {
-                      user.role == "admin" ? <li> <Link to="/admin">{t('admin')}</Link></li> : <></>
+                      user.role == "admin" ? <span> <Link className="nav-button" to="/admin">{t('admin')}</Link></span> : <></>
                     }
-                  </ul>
+                  </div>
                   :
-                  <ul className="nav-links">
-                    <li onClick={() => openModal(Signup)}><a/>{t('signup')}</li>
-                    <li onClick={() => openModal(Login)}><a/>{t('login')}</li>
-                  </ul>
+                  <div className="nav-buttons">
+                    <span onClick={() => openModal(Signup)}>{t('signup')}</span>
+                    <span  onClick={() => openModal(Login)}>{t('login')}</span>
+                  </div>
               }
             </div>
           </div>

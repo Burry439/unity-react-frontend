@@ -9,6 +9,8 @@
     src: local("Arcade"), url( ../../../fonts/ArcadeLight-d196.ttf);
    
 }
+
+
 .title{
     font-family: "Arcade";
     color: #ffffff;

@@ -106,7 +106,7 @@ const Game = (props) => {
               <motion.div variants={duplicateTabVariants} initial="hidden" animate="visible">{t('duplicateTab')}</motion.div>
               :
               <GamePlayer 
-                    className="game-player-screen" 
+                   
                     gameControls={gameControls}
                     loaderControls={loaderControls}
                     exit={exit}

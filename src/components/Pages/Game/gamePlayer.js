@@ -46,7 +46,7 @@ const GamePlayer = ({game, gameControls,gameTitle, loaderControls,exit, hidden, 
     return ( 
         <>
         <motion.div variants={arcadeVariants} initial="hidden" animate="visible">
-          <ArcadeMachine gameTitle={gameTitle}/> 
+          <ArcadeMachine gametitle={gameTitle}/> 
         </motion.div>
        
         <motion.div variants={gameVariants} className="game-player-container" initial="hidden" animate={gameControls} exit="exit">

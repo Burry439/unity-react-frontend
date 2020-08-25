@@ -10,16 +10,6 @@ header {
   padding-inline-end: 80px ;
 }
 
-
-
-li,a, button {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  color : #edf0f1;
-  text-decoration: none;
-}
-
 .logo-container{
   margin-inline-end: auto;
 }
@@ -35,39 +25,65 @@ li,a, button {
   flex-direction: row;
 }
 
-.nav-links{
-  list-style: none;
-}
-
-.nav-links li{
+.nav-buttons span{
  display: inline-block;
- padding-inline-start: 40px;
+ padding-inline-start: 20px;
  cursor: pointer
 }
 
-.nav-links li a{
+.nav-buttons span:hover{
+  color: yellow ;
+  transform: scale(1.1);
+ }
+ 
+
+.nav-button{
+  color: white;
   transition: all 0.3s ease 0s;
-
+  text-decoration: none !important;
 }
 
-.nav-links li:hover{
-  color: yellow;
+.nav-button:hover{
+  color: yellow ;
+  transform: scale(1.1);
+}
+
+.language-selector{
+  position: relative;
+  display: inline-block;
+  transition: all 0.3s ease 0s;
+}
+
+.language-selector:hover{
+  transform: scale(1.1);
 }
 
 
+.languages{
+  display: none;
+  position: absolute;
+  background-color: black;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+  border-radius: 15px;
+  right: -30px;
+}
 
-button{
-  margin-inline-start: 20px;
-  padding : 9px 25px;
-  background-color: rgba(0,136,169,1);
-  border: none;
-  border-radius: 50px;
+.language-selector:hover .languages{
   cursor: pointer;
+  display: block;
+ 
+}
+
+.language {
+  display: block;
+  text-align: center;
   transition: all 0.3s ease 0s;
 }
 
-button:hover{
-  background-color: rgba(0,136,169,0.8);
+.language:hover{
+  cursor: pointer;
+  color: yellow;
+  transform: scale(1.1);
 }
-
-
