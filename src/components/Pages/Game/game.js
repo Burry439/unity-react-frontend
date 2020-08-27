@@ -37,8 +37,6 @@ const duplicateTabVariants = {
   },
 }
 
-
-
 let Socket = null
 
 const Game = (props) => {
@@ -50,7 +48,7 @@ const Game = (props) => {
     const apiUrl = gameName == "onlineGame" ? config.MULTIPLAYER_GAME_URL : config.SINGLEPLAYER_GAME_URL
     const {user, setUser} = useContext(UserContext)
     const [isDuplicate, setIsDuplicate] = useState(false)
-    const { addToast } = useToasts()
+    const [challengeCompleted, setChallengeCompleted] = useState("")
 
     useEffect(() =>{
       if(user._id){
@@ -62,7 +60,6 @@ const Game = (props) => {
     },[user])
 
      useEffect(() => {
-      
        return () => {
          console.log("in return : " + Socket)
          if(Socket != null){
@@ -91,13 +88,13 @@ const Game = (props) => {
           })
 
         Socket.on("challengeCompleted" , (challenge) =>{
-            user.completedChallenges.push(challenge)
-            user.tickets += challenge.reward;
-            setUser(user)
-            addToast("good job you completed challenge: " + challenge.challengeName, { appearance: 'info' })
+          user.completedChallenges.push(challenge)
+          user.tickets += challenge.reward;
+          setUser(user)
+          setChallengeCompleted(challenge.challengeName)
         })
+      }
     }
-  }
     if(user._id){
         return(
           <motion.div className="container" exit={exit}>
@@ -106,14 +103,15 @@ const Game = (props) => {
               <motion.div variants={duplicateTabVariants} initial="hidden" animate="visible">{t('duplicateTab')}</motion.div>
               :
               <GamePlayer 
-                   
                     gameControls={gameControls}
                     loaderControls={loaderControls}
                     exit={exit}
                     hidden={hidden}
-                    visible={visible}
-                    gameTitle={t(gameName + "Title")}
-                    game={`${apiUrl}/${gameName}/?${user._id}`}/> 
+                    visible={visible} 
+                    gameName={t(gameName + "Title")}
+                    game={`${apiUrl}/${gameName}/?${user._id}`}
+                    challengeCompleted={challengeCompleted}
+                    /> 
       
           }
           </motion.div>

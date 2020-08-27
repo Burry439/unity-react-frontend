@@ -76,28 +76,7 @@ const GameDetails = ({title, details,path, t}) => {
                   </div>
                 </div>
             </motion.div>
-            //  <div className="game-details-image-container">
-            //     <img src="https://images.unsplash.com/photo-1589289959525-b5b685332c7f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=80" alt="none"/>
-            // </div>
-
-            // <div className="game-details-content">
-            //     <p className="game-details-title text-medium">
-            //        {title}
-            //     </p>
-            //     <div className="game-details-info">
-            //         <p className="text-medium">{details}</p>
-            //     {user._id ? 
-            //        <p className="game-details-play text-medium" onClick={() => toGame()}>{t("play")}</p> : 
-            //        <>
-            //        <p className="game-details-play text-medium" onClick={() => openModal(Login)}>{t("login")}</p> 
-            //        <p className="game-details-play text-medium" onClick={() => openModal(Signup)}>{t("signup")}</p> 
-            //        </>
-            //     }
-            //     </div>
-            // </div> 
-
-     
-     );
+          );
 }
  
 export default GameDetails;

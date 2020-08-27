@@ -3,10 +3,9 @@ import loading from "../../../images/tenor.gif"
 import { motion } from "framer-motion"
 
 import "./game.css"
-import test from "../../../images/test.svg"
 import ArcadeMachine from './arcadeMachine';
 
-const GamePlayer = ({game, gameControls,gameTitle, loaderControls,exit, hidden, visible}) => {
+const GamePlayer = ({game, gameControls, loaderControls,exit, hidden, visible,challengeCompleted, gameName}) => {
 
     const arcadeVariants = {
         hidden :{
@@ -42,11 +41,11 @@ const GamePlayer = ({game, gameControls,gameTitle, loaderControls,exit, hidden, 
         hidden,
         visible,
       }
-       
+   
     return ( 
-        <>
+        <div className="game-player">
         <motion.div variants={arcadeVariants} initial="hidden" animate="visible">
-          <ArcadeMachine gametitle={gameTitle}/> 
+          <ArcadeMachine challengeCompleted={challengeCompleted} gameName={gameName}/> 
         </motion.div>
        
         <motion.div variants={gameVariants} className="game-player-container" initial="hidden" animate={gameControls} exit="exit">
@@ -56,7 +55,7 @@ const GamePlayer = ({game, gameControls,gameTitle, loaderControls,exit, hidden, 
         <motion.div className="game-player-container" variants={loaderVariants} initial="hidden" animate={loaderControls} exit="exit">
             <img className="game-player-screen" src={loading} />
         </motion.div>
-      </>
+      </div>
      );
 }
  

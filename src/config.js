@@ -10,7 +10,7 @@ const dev = {
     SINGLEPLAYER_GAME_URL : "https://single-player-games-iframe.herokuapp.com"
   };
   
-  const config = process.env.NODE_ENV  !== 'production'
+  const config = process.env.NODE_ENV  === 'production'
     ? prod
     : dev;
   

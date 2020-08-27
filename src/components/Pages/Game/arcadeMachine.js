@@ -1,10 +1,60 @@
-import React from 'react';
+import React, { useEffect,useRef } from 'react';
 
-export default function ArcadeMachinesvg(props) {
+export default function ArcadeMachine({gameName,challengeCompleted, ...props}) {
+  
+
+
+  const titleRef = useRef()
+  const challengeRef = useRef()
+
+
+  useEffect(() =>{
+    let timer 
+    // make this better
+    if(challengeCompleted != ""){
+      titleRef.current.classList.add("hide")
+      titleRef.current.classList.remove("show")
+      challengeRef.current.classList.add("show")      
+      challengeRef.current.classList.remove("hide")
+     
+    }
+    timer = setTimeout(() =>{
+      challengeRef.current.classList.add("hide")    
+      challengeRef.current.classList.remove("show")
+      titleRef.current.classList.remove("hide")
+      titleRef.current.classList.add("show")
+    },5000)
+    
+    return () =>{
+      clearTimeout(timer)
+    }
+
+  },[challengeCompleted])
+ 
+
   return (
-    <svg version="1.1" viewBox="0 0 556.1 529.78" xmlns="http://www.w3.org/2000/svg" width="556.1" height="529.78" {...props}>
-      <g transform="matrix(1.0667 0 0 1.0667 1.402 0)">
-        <rect x="-.0088875" width="516.84" height="496.65" ry={0} fill="#666" strokeWidth=".60188" />
+
+    <>
+    <div className="arcade-title-container" transform="scale(.8361 1.196)" x="55.91737" y="-38.028809" fontFamily="sans-serif" fontSize="96.58px" strokeWidth="1.3414" style={{lineHeight: '1.25'}} xmlSpace="preserve">
+      <div ref={titleRef} className="show"
+      >
+       <p className="arcade-title">
+        {gameName}
+      </p> 
+      </div>
+
+      <div ref={challengeRef} className="hide">
+      <p className="challenge-completed">Challenge Completed!</p>
+      <hr></hr>
+        <p className="challenge-completed">{challengeCompleted}</p>
+    </div>
+
+
+    </div>
+
+    <svg version="1.1" viewBox="0 0 559.02 704.93" xmlns="http://www.w3.org/2000/svg" width="559.02" height="704.93" {...props}>
+      <g transform="matrix(1.0667 0 0 1.0667 1.402 175.21)">
+        <rect x="-.0088875" y="-164.25" width="522.76" height="660.05" ry={0} fill="#666" strokeWidth=".69783" />
         <rect x="66.24" y="57.205" width={384} height="264.97" fill="#1a1a1a" stroke="#000" strokeLinecap="round" strokeLinejoin="round" strokeWidth=".89909" />
         <g transform="matrix(2.8215,0,0,2.1932,-166.88,-2687)">
           <path d="m228.15 1379.6h-154.17v-135.91h154.17zm-169.47 18.516h184.77v-172.94h-184.77z" fill="#ccc" />
@@ -35,8 +85,10 @@ export default function ArcadeMachinesvg(props) {
             </g>
           </g>
         </g>
+        <path d="m27.964-149.76 468.95 1.342-2.8892 126.97-465.85-2.5387z" fill="#0bff68" fillOpacity=".4375" stroke="#000" strokeWidth="9.3747" style={{mixBlendMode: 'overlay'}} />
+
       </g>
-      <g transform="translate(-261.96 239.58)">
+      <g transform="translate(-261.96 414.79)">
         <path d="m350.12 227.3c6.0728 0 11.047 4.1313 11.047 9.1756s-4.9737 9.1756-11.047 9.1756-11.047-4.1313-11.047-9.1756 4.9737-9.1756 11.047-9.1756z" fill="#656d78" strokeWidth="1.2585" />
         <path d="m471.63 218.13c-12.147 0-22.093 8.2614-22.093 18.351 0 10.09 9.946 18.351 22.093 18.351s22.093-8.2614 22.093-18.351c0-10.09-9.946-18.351-22.093-18.351z" fill="#ffce54" strokeWidth="1.2585" />
         <g transform="matrix(1.3808,0,0,1.1469,-278.01,-113.78)" opacity=".5">
@@ -55,5 +107,6 @@ export default function ArcadeMachinesvg(props) {
         </g>
       </g>
     </svg>
+    </>
   );
 }
