@@ -2,7 +2,6 @@ import React, {useContext} from 'react';
 import {Table, Spinner} from 'react-bootstrap'
 import {ModalContext} from '../../../contexts/modalContext';
 import AdminEdit from './adminEdit';
-import "./admin.css"
 
 const AdminTable = ({table,setTable}) => {
     const {openModal} = useContext(ModalContext)

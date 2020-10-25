@@ -1,0 +1,17 @@
+.close-button-container{
+    display: flex;
+    justify-content: flex-end;
+    .close-button{
+        color : black;
+        margin-bottom: 20px;
+        width: fit-content;
+        transition: transform .2s; 
+        font-weight: bolder;
+    }
+    
+    .close-button:hover{
+        cursor: pointer;
+        transform: scale(1.2);
+    }
+}
+

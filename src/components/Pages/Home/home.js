@@ -1,6 +1,6 @@
 import React from 'react';
 import GameList from "./gameList"
-import "./home.css"
+import homeStyles from "./home.module.scss"
 import { useTranslation } from 'react-i18next';
 import { motion } from "framer-motion"
 
@@ -30,17 +30,17 @@ const Home = () => {
   const { t } = useTranslation("home");
     return ( 
       <>
-      <motion.div className="container"
+      <motion.div className={homeStyles["container"]}
         variants={containerVariants}
         initial="hidden"
         animate="visible"
         exit="exit"
       >
-        <div className="top-section">
-        <h1 className="title">{t('title')}</h1>
+        <div className={homeStyles["top-section"]}>
+        <h1 className={homeStyles["title"]}>{t('title')}</h1>
         </div>
         </motion.div>
-        <div className="game-list-section">
+        <div className={homeStyles["game-list-section"]}>
         <GameList t={t}/>
         </div>
       </>

@@ -6,10 +6,11 @@ import AdminCreate from './adminCreate';
 import {ModalContext} from '../../../contexts/modalContext';
 import {UserContext} from '../../../contexts/userContext';
 import { useHistory } from "react-router-dom";
-
 import config from "../../../config"
 import { useTranslation } from 'react-i18next';
 import { motion } from "framer-motion"
+
+import adminStyles from "./admin.module.scss"
 
 const Admin = () => {
     const {openModal} = useContext(ModalContext)
@@ -101,7 +102,7 @@ const Admin = () => {
     },[pagination.skip])
 
     return ( 
-        <motion.div className="container" exit="exit">
+        <motion.div className={adminStyles["container"]} exit="exit">
         <AdminSearch filter={filter} setFilter={setFilter} table={table} setNewTable={setNewTable}/>
         <button onClick={() => openModal(() => AdminCreate({table, setTable}))}>Create new {table.entityType}</button>
         <AdminTabs table={table} setTable={setTable} setFilter={setFilter}/>

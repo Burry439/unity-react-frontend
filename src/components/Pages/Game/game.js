@@ -1,12 +1,15 @@
 import React, {useEffect,useContext,useState} from 'react';
 import { UserContext } from "../../../contexts/userContext";
+import { GamesContext } from "../../../contexts/gamesContext";
+import challengeCompleteSoundEffect from "../../../sounds/challengeComplete.mp3"
 import GamePlayer from './gamePlayer';
 import config from "../../../config"
 import io from "socket.io-client";
-import { useToasts } from 'react-toast-notifications'
 import { motion, useAnimation } from "framer-motion"
 import { useHistory } from "react-router-dom";
-import { useTranslation } from 'react-i18next';
+import {useTranslation } from 'react-i18next';
+import ChallengeList from './challengeList';
+import gameStyles from  "./game.module.scss"
 
 const exit = {
   y: '-100vh',
@@ -39,86 +42,125 @@ const duplicateTabVariants = {
 
 let Socket = null
 
+const setArcadeFontSize = (text) =>{
+  let fontSize = "longestText"
+    switch (true){
+      case text.length <= 10:
+        fontSize = "shortestText"
+        break
+      case text.length == 15 || text.length == 16:
+        fontSize = "mediumText"
+        break
+    }
+  return fontSize
+}
+
 const Game = (props) => {
-   const { t } = useTranslation("game");
-    const gameControls = useAnimation()
-    const loaderControls = useAnimation()
-    const history = useHistory()
-    let gameName = props.location.pathname.match(/.*\/(.*)$/)[1];
-    const apiUrl = gameName == "onlineGame" ? config.MULTIPLAYER_GAME_URL : config.SINGLEPLAYER_GAME_URL
-    const {user, setUser} = useContext(UserContext)
-    const [isDuplicate, setIsDuplicate] = useState(false)
-    const [challengeCompleted, setChallengeCompleted] = useState("")
+  let gameName = props.location.pathname.match(/.*\/(.*)$/)[1];
+  const audio = new Audio(challengeCompleteSoundEffect)
+  const { t,i18n } = useTranslation("game");
+  const gameControls = useAnimation()
+  const loaderControls = useAnimation()
+  const history = useHistory() 
+  const apiUrl = gameName == "onlineGame" ? config.MULTIPLAYER_GAME_URL : config.SINGLEPLAYER_GAME_URL
+  const {user, setUser} = useContext(UserContext)
+  const {setSelectedGame} = useContext(GamesContext)
 
-    useEffect(() =>{
-      if(user._id){
-        startSocketConnection()
+  const [isDuplicate, setIsDuplicate] = useState(false)
+  const [arcadeText, setArcadeText] = useState({
+    text : t(gameName + "Title"),
+    fontSize : setArcadeFontSize(t(gameName + "Title"))
+  })
+
+  i18n.on("languageChanged", () =>{
+    setArcadeText(({
+      text : t(gameName + "Title"),
+      fontSize : setArcadeFontSize(t(gameName + "Title"))
+    }))
+  })
+
+  useEffect(() =>{    
+    if(user._id){
+      startSocketConnection()
+    }
+    if(user == "not logged in"){
+      history.push("/home") 
+    }
+  },[user])
+
+
+
+  useEffect(() => {
+    setSelectedGame(gameName)
+    return () => {
+      if(Socket != null){
+        Socket.disconnect()
       }
-      if(user == "not logged in"){
-        history.push("/home") 
-      }
-    },[user])
-
-     useEffect(() => {
-       return () => {
-         console.log("in return : " + Socket)
-         if(Socket != null){
-           Socket.disconnect()
-         }
-       }
-     }, [])
-    const startSocketConnection = () =>{
-      loaderControls.start("visible")
-     
-      Socket = io(apiUrl); 
-      if(Socket){
-        Socket.on("connect", () => {
-            console.log("connetion")
-            Socket.emit("ReactConnected",{userId : user._id, gameName : gameName})
-
+    }
+  }, [])
+  const startSocketConnection = () =>{
+    loaderControls.start("visible")
+    Socket = io(apiUrl); 
+    if(Socket){
+      Socket.on("connect", () => {
+        Socket.emit("ReactConnected",{userId : user._id, gameName : gameName})
       });
 
-        Socket.on("gameReady" , () =>{
-            loaderControls.start("hidden")
-            gameControls.start("visible")
-        })
+      Socket.on("gameReady" , () =>{
+          loaderControls.start("hidden")
+          gameControls.start("visible")
+      })
 
-        Socket.on("isDuplicate" , () =>{
-            setIsDuplicate(true)
+      Socket.on("isDuplicate" , () =>{
+          setIsDuplicate(true)
+      })
+
+      Socket.on("challengeCompleted" , (challenge) =>{
+        user.completedChallenges.push(challenge)
+        user.tickets += challenge.reward;
+        setUser(user)
+        audio.play()
+        setArcadeText({
+          text : `${t("challengeCompleted")} \n ${t(gameName + challenge.challengeName)}`,
+          fontSize : setArcadeFontSize(`Challenge Completed ${challenge.challengeName}`)
+        })
+        setTimeout(() =>{
+          setArcadeText({
+            text : t(gameName + "Title"),
+            fontSize : setArcadeFontSize( t(gameName + "Title"))
           })
-
-        Socket.on("challengeCompleted" , (challenge) =>{
-          user.completedChallenges.push(challenge)
-          user.tickets += challenge.reward;
-          setUser(user)
-          setChallengeCompleted(challenge.challengeName)
-        })
-      }
+        },5000)
+      })
     }
-    if(user._id){
-        return(
-          <motion.div className="container" exit={exit}>
-          {
-              isDuplicate ?
-              <motion.div variants={duplicateTabVariants} initial="hidden" animate="visible">{t('duplicateTab')}</motion.div>
-              :
-              <GamePlayer 
-                    gameControls={gameControls}
-                    loaderControls={loaderControls}
-                    exit={exit}
-                    hidden={hidden}
-                    visible={visible} 
-                    gameName={t(gameName + "Title")}
-                    game={`${apiUrl}/${gameName}/?${user._id}`}
-                    challengeCompleted={challengeCompleted}
-                    /> 
-      
-          }
-          </motion.div>
-      )
-    }else{
-      return <motion.div className="container" exit={exit}></motion.div>
-    }
+  }
+  if(user._id){
+      return(
+        <motion.div className={gameStyles.gamePlayerContainer} exit={exit}>
+        {
+            isDuplicate ?
+            <motion.div variants={duplicateTabVariants} initial="hidden" animate="visible">{t('duplicateTab')}</motion.div>
+            :
+            <>
+            
+            {<ChallengeList gameName={gameName} t={t}/>}
+            <GamePlayer 
+                  gameControls={gameControls}
+                  loaderControls={loaderControls}
+                  exit={exit}
+                  hidden={hidden}
+                  visible={visible} 
+                  game={`${apiUrl}/${gameName}/?${user._id}`}
+                  arcadeText={arcadeText}
+                  t={t}
+                  /> 
+                  
+            </>
+        }
+        </motion.div>
+    )
+  }else{
+    return <motion.div exit={exit}></motion.div>
+  }
 }
  
 export default Game;

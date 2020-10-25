@@ -1,0 +1,22 @@
+// _sideBarTheme.scss
+
+@function set-theme($color) {
+  @if(lightness($color) > 70) {
+    @return $dark;
+  } @else {
+    @return $light;
+  }
+}
+$dark:(
+  textPrimary:#b6b6b6,
+  textSecondary: #ececec,
+  bgPrimary:#23232e,
+  bgSecondary: #141418
+);
+
+$light:(
+  textPrimary: #1f1f1f,
+  textSecondary:  #000000,
+  bgPrimary:  #ffffff,
+  bgSecondary:  #e4e4e4
+);

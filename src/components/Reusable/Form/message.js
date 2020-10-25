@@ -1,11 +1,10 @@
 import React from 'react';
-import "./form.css"
+import messageStyles, {message} from "./message.module.scss"
 
 
-const Message = ({ status, text, direction }) => {
-
+const Message = ({ status, text }) => {
     return status && status !== 'loading' ? (
-      <div className={`message ${status}`} style={direction}>{text}</div>
+      <div className={`${message} ${messageStyles[status]}`}>{text}</div>
     ) : null
 }
 

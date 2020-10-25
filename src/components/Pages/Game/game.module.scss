@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:600&display=swap');
+
+@font-face {
+    font-family: 'Arcade';
+    src: local("Arcade"), url( ../../../fonts/ArcadeLight-d196.ttf);
+  }
+
+.gamePlayerContainer{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+
+  .gamePlayer{
+    position: relative;
+    display: flex;
+    flex-direction: row-reverse;
+
+    .gameScreenContainer{ 
+      position: absolute;
+      text-align: center;
+      width: 410px;
+      height: 283px;
+      left: 70px;
+      top: 235px;  
+      
+      .gameScreen{
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+
+@media(max-width : 980px){
+  .gamePlayerContainer{
+    flex-direction: column;
+  }   
+}

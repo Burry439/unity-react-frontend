@@ -1,11 +1,11 @@
 import React from 'react';
 import GameDetails from "./gameDetails"
-import "./home.css"
+import homeStyles from "./home.module.scss"
 
 const GameList = ({t}) => {
     const games = []
     return ( 
-            <div className="game-list-container">
+            <div className={homeStyles["game-list-container"]}>
                  {/* <section className="game-list">  */}
                         <GameDetails t={t} title={t("multiPlayerGameTitle")} details={t("multiPlayerGameDetails")} path="onlineGame"/>
                         <GameDetails t={t} title={t("fallGameTitle")} details={t("fallGameDetails")}  path="fallGame" />

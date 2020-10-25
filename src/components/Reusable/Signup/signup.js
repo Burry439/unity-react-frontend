@@ -4,7 +4,6 @@ import {ModalContext} from '../../../contexts/modalContext';
 import { useForm } from "react-hook-form";
 import Form from '../Form/form';
 
-import "./signup.css"
 
 const Signup = () => {
     const {signup} = useContext(UserContext)

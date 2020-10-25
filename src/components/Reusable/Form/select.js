@@ -1,5 +1,5 @@
 import React from 'react';
-import "./form.css"
+import formStyle from "./form.module.scss"
 
 const SelectField = ({ field, currentValue,formValidation}) => {
     const { label, key, validation,...attributes } = field
@@ -7,8 +7,8 @@ const SelectField = ({ field, currentValue,formValidation}) => {
     return (
       <div>
       <React.Fragment>
-      <label>{label}</label>
-    <select className="form-control" defaultValue={currentValue} {...attributes} ref={register}>
+      <label className={formStyle["form-field-label"]}>{label}</label>
+    <select  defaultValue={currentValue} {...attributes} ref={register}>
       {field.options.map(option => (
         <option key={option} name={field.name} value={option}>{option}</option>
       ))}

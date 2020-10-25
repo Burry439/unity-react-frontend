@@ -5,7 +5,7 @@ export default {
     },
     "fields" : [
         {
-            "label": "username",
+            "label": "Username",
             "name": "username",
             "placeholder": "Enter your username",
             "validation" : {
@@ -13,7 +13,7 @@ export default {
             }
         },
         {
-            "label": "password",
+            "label": "Password",
             "placeholder": "Enter your password",
             "name" : "password",
             "type" : "password",

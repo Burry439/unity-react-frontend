@@ -1,19 +1,7 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #000000;
-  background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+ body {
+  font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  transition: all 0.25s linear;
 }
 
 .suspenseLoader{
@@ -22,5 +10,6 @@ code {
   left: 50%;
   margin-top: -100px; 
 }
+
 
 

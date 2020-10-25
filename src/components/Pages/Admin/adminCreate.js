@@ -3,7 +3,6 @@ import Form from '../../Reusable/Form/form';
 import config from "../../../config"
 
 const AdminCreate = ({table, setTable}) => {
-  console.log(table)
     const errorStatus = ["404","500","401"] 
 
     const [formResponse, setFormResponse] = useState({

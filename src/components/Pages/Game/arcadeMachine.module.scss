@@ -1,0 +1,33 @@
+.arcadeTextContainer{
+    position: absolute;
+    top: 30px;
+    left: 35px;
+    width: 490px;
+    height: 125px;
+    white-space: pre-wrap;
+
+    .arcadeText{
+        white-space: pre-wrap;
+        margin-top: 10px;
+        color: white;
+        font-family: "Arcade";
+        text-align: center;
+        margin: 0px;
+        overflow-wrap: break-word;
+    }
+    
+    .shortestText {
+        font-size : 80px
+    }
+    
+    .mediumText {
+        font-size: 55px;
+    }
+    
+    .longestText {
+        font-size: 30px;
+        padding: 20px;
+    }
+}
+
+

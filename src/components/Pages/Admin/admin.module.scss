@@ -1,0 +1,28 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    .search-container {
+        display : flex;
+        .input-group-prepend.btn {
+            z-index: 0 !important;
+        }
+        
+        .table-row:hover{
+            cursor: pointer;
+            display:  "inline";
+        }
+        
+        option{
+            color: black;
+        }
+        
+        label{
+            color : white
+        }
+    }
+}
+

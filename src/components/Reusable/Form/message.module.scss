@@ -1,0 +1,32 @@
+.message {
+  width: 100%;
+  position: relative;
+  padding: .75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  opacity: 0;
+  transition: opacity 2s linear;
+}
+
+%status-shared {
+  opacity: 1;
+  transition: opacity 2s linear ;
+}
+
+.success {
+  @extend %status-shared;
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  
+}
+
+.error {
+  @extend %status-shared;
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+

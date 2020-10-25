@@ -1,5 +1,6 @@
 import React, {useContext, useEffect} from 'react';
 import {Form} from 'react-bootstrap'
+import adminStyles from "./admin.module.scss"
 
 const AdminSearch = ({filter, setFilter, table,setNewTable}) => {
     
@@ -39,7 +40,7 @@ const AdminSearch = ({filter, setFilter, table,setNewTable}) => {
     }, [table.headers])
     
     return ( 
-        <div className="search-container">
+        <div className={adminStyles["search-container"]}>
         <Form.Group controlId="exampleForm.SelectCustom">
             <Form.Label>Search By</Form.Label>
                 <Form.Control as="select" custom onChange={e =>setSearchField(e.target.value)}>

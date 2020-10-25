@@ -1,7 +1,7 @@
 import React, {useContext,useEffect,lazy} from 'react';
 import { UserContext } from "../../../contexts/userContext";
 import { useHistory } from "react-router-dom";
-import "./profile.css"
+import profileStyles from "./profile.module.scss"
 import { motion } from "framer-motion"
 
 const containerVariants = {
@@ -39,7 +39,7 @@ const Profile = () => {
     if(user._id){
         return ( 
             <motion.div 
-            className="container"
+            className={profileStyles["container"]}
             variants={containerVariants}
             initial="hidden"
             animate="visible"

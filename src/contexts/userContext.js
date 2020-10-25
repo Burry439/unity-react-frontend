@@ -8,20 +8,15 @@ const UserContextProvider = (props) => {
   const [user, setUser] = useState("loading")
   const errorStatuses = [404,500,401,403]
   useEffect(() =>{
-    console.log("in use effect")
     getUser()
   },[])
 
   const validateResponse = async (res) =>{
-    console.log(res.status)
     if(errorStatuses.includes(res.status)){
-      console.log("in if")
       setUser("not logged in")
       return await res.text()
     }else{
-      console.log("in else")
       const response = await res.json()
-      console.log("validate response else : " + response)
       setUser(response)
       return("success")
     }
@@ -69,12 +64,17 @@ const UserContextProvider = (props) => {
           'language' : "en"
         },
     });
-    console.log(res)
     return await validateResponse(res)
   }
 
+  const userCompletedChallenge = (challengeId) =>{
+    return user.completedChallenges.filter((challenge) =>{
+      return challenge._id == challengeId
+    }).length
+  }
+
   return(
-        <UserContext.Provider value={{user, login,signout,signup, getUser,setUser}}>
+        <UserContext.Provider value={{user, login,signout,signup, getUser,setUser,userCompletedChallenge}}>
             {props.children}
         </UserContext.Provider>
   )

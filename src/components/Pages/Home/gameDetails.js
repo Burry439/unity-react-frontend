@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import "./home.css"
+import homeStyles from "./home.module.scss"
 import { UserContext } from "../../../contexts/userContext";
 import { useHistory } from "react-router-dom";
 import {ModalContext} from '../../../contexts/modalContext';
@@ -63,14 +63,14 @@ const GameDetails = ({title, details,path, t}) => {
             initial="hidden"
             animate={selctedAnimation}
             exit="exit">
-            <div className="cartridge">
+            <div className={homeStyles["cartridge"]}>
             <Cartridge title={title}/>
-            <div className="game-button-container">
+            <div className={homeStyles["game-button-container"]}>
                 {user._id ? 
-                    <p className="game-button text-medium" onClick={() => toGame()}>{t("play")}</p> : 
+                    <p className={`${homeStyles["game-button"]} ${homeStyles["text-medium"]}`} onClick={() => toGame()}>{t("play")}</p> : 
                     <>
-                    <p className="game-button text-medium" onClick={() => openModal(Login)}>{t("login")}</p> 
-                    <p className="game-button text-medium" onClick={() => openModal(Signup)}>{t("signup")}</p> 
+                    <p className={`${homeStyles["game-button"]} ${homeStyles["text-medium"]}`} onClick={() => openModal(Login)}>{t("login")}</p> 
+                    <p className={`${homeStyles["game-button"]} ${homeStyles["text-medium"]}`} onClick={() => openModal(Signup)}>{t("signup")}</p> 
                    </>
                  } 
                   </div>

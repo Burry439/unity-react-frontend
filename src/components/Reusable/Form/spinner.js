@@ -1,11 +1,11 @@
 import React from 'react';
 import Spinner from 'react-bootstrap/Spinner'
-import "./form.css"
+import spinnerStyle from "./spinner.module.scss"
 
 const FormSpinner = ({ loading }) => {
-    return loading ? (
-        <Spinner animation="border" variant="primary"/>
-    ) : null
+     return loading ? (
+         <Spinner className={spinnerStyle["spinner"]} animation="border" variant="primary"/>
+     ) : null
   }
 
   export default FormSpinner

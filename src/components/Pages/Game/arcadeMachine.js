@@ -1,55 +1,47 @@
-import React, { useEffect,useRef } from 'react';
+import React, { useLayoutEffect,useContext} from 'react';
+import { motion, useAnimation } from "framer-motion"
+import arcadeMachineStyles from  "./arcadeMachine.module.scss"
+import { GamesContext } from "../../../contexts/gamesContext";
 
-export default function ArcadeMachine({gameName,challengeCompleted, ...props}) {
+
+export default function ArcadeMachine({arcadeText,t, ...props}) {
   
-
-
-  const titleRef = useRef()
-  const challengeRef = useRef()
-
-
-  useEffect(() =>{
-    let timer 
-    // make this better
-    if(challengeCompleted != ""){
-      titleRef.current.classList.add("hide")
-      titleRef.current.classList.remove("show")
-      challengeRef.current.classList.add("show")      
-      challengeRef.current.classList.remove("hide")
-     
-    }
-    timer = setTimeout(() =>{
-      challengeRef.current.classList.add("hide")    
-      challengeRef.current.classList.remove("show")
-      titleRef.current.classList.remove("hide")
-      titleRef.current.classList.add("show")
-    },5000)
-    
-    return () =>{
-      clearTimeout(timer)
+  const arcadeTextVariants = {
+    initial : {
+      opacity : 1
+    },
+    visible : {
+      opacity : 1
+    },
+    blink : {
+      opacity : [0,1],
+      transition : {
+        duration : 2.0
+      }
     }
 
-  },[challengeCompleted])
+  }
+  const arcadeTextControler = useAnimation()
+  const { games } = useContext(GamesContext)
+
+  useLayoutEffect(() =>{
+    arcadeTextControler.start("blink")
+  },[arcadeText])
  
 
   return (
-
     <>
-    <div className="arcade-title-container" transform="scale(.8361 1.196)" x="55.91737" y="-38.028809" fontFamily="sans-serif" fontSize="96.58px" strokeWidth="1.3414" style={{lineHeight: '1.25'}} xmlSpace="preserve">
-      <div ref={titleRef} className="show"
-      >
-       <p className="arcade-title">
-        {gameName}
-      </p> 
-      </div>
-
-      <div ref={challengeRef} className="hide">
-      <p className="challenge-completed">Challenge Completed!</p>
-      <hr></hr>
-        <p className="challenge-completed">{challengeCompleted}</p>
-    </div>
-
-
+    
+    <div className={arcadeMachineStyles.arcadeTextContainer} transform="scale(.8361 1.196)" x="55.91737" y="-38.028809" fontFamily="sans-serif" fontSize="96.58px" strokeWidth="1.3414" style={{lineHeight: '1.25'}} xmlSpace="preserve">
+ 
+       <motion.p 
+       initial="initial"
+       variants={arcadeTextVariants} 
+       animate={arcadeTextControler} 
+       exit="exit" className={`${arcadeMachineStyles.arcadeText}   ${arcadeMachineStyles[arcadeText.fontSize]}`}
+        >
+        { games.selectedGame ?  arcadeText.text : t("notFoundTitle")}
+      </motion.p> 
     </div>
 
     <svg version="1.1" viewBox="0 0 559.02 704.93" xmlns="http://www.w3.org/2000/svg" width="559.02" height="704.93" {...props}>
