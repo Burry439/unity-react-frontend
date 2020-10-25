@@ -1,16 +1,18 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import GameDetails from "./gameDetails"
 import homeStyles from "./home.module.scss"
+import { GamesContext } from "../../../contexts/gamesContext";
 
 const GameList = ({t}) => {
-    const games = []
+     const { games } = useContext(GamesContext)
+
     return ( 
             <div className={homeStyles["game-list-container"]}>
-                 {/* <section className="game-list">  */}
-                        <GameDetails t={t} title={t("multiPlayerGameTitle")} details={t("multiPlayerGameDetails")} path="onlineGame"/>
-                        <GameDetails t={t} title={t("fallGameTitle")} details={t("fallGameDetails")}  path="fallGame" />
-                        <GameDetails t={t} title={t("cubeGameTitle")} details={t("cubeGameDetails")}  path="cubeGame"/>
-                 {/* </section>  */}
+               {
+                    games.games.map((game) =>{
+                         return <GameDetails t={t} title={t(`${game.gameName}Title`)} details={t(`${game.gameName}Details`)} path={game.gameName}/>
+                    })
+               }          
             </div>
      );
 }

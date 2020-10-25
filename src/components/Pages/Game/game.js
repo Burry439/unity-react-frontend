@@ -64,7 +64,7 @@ const Game = (props) => {
   const history = useHistory() 
   const apiUrl = gameName == "onlineGame" ? config.MULTIPLAYER_GAME_URL : config.SINGLEPLAYER_GAME_URL
   const {user, setUser} = useContext(UserContext)
-  const {setSelectedGame} = useContext(GamesContext)
+  const {setSelectedGame,games} = useContext(GamesContext)
 
   const [isDuplicate, setIsDuplicate] = useState(false)
   const [arcadeText, setArcadeText] = useState({
@@ -89,6 +89,14 @@ const Game = (props) => {
   },[user])
 
 
+  useEffect(()=>{
+      if(!games.selectedGame){
+        setArcadeFontSize(prevState =>({
+          ...prevState,
+          fontSize : setArcadeFontSize(t("notFoundTitle"))
+      }))
+      }
+  },[games])
 
   useEffect(() => {
     setSelectedGame(gameName)
