@@ -13,7 +13,7 @@
     "i18next-browser-languagedetector": "^4.3.0",
     "i18next-http-backend": "^1.0.17",
     "i18next-xhr-backend": "^3.2.2",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-cookie": "^4.0.3",
